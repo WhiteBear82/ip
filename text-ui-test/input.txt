@@ -1,3 +1,7 @@
+mark 0
+unmark 0
+mark -1
+unmark -1  
 todo read book
 deadline submit report /by tomorrow
 event team meeting /from Mon 2pm /to 4pm
@@ -6,5 +10,32 @@ mark 1
 mark 2
 list
 unmark 2 
+list
+todo
+todo buy pajamas
+deadline
+deadline /by
+deadline /by Sunday
+deadline buy goggles
+deadline buy goggles /by Sunday
+event
+event /from /to
+event /from Monday 2pm /to
+event /from /to 4pm
+event /from Monday 2pm /to 4pm
+event project meeting
+event project meeting /from
+event project meeting /to
+event project meeting /from Monday 2pm
+event project meeting /to 4pm
+event project meeting /from Monday 2pm /to
+event project meeting /from /to 4pm
+event project meeting /from Monday 2pm /to 4pm
+list
+mark 100
+unmark 100
+mark 2
+mark 3
+unmark 2
 list
 bye

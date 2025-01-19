@@ -4,6 +4,22 @@
 	____________________________________________________________
 
 	____________________________________________________________
+	ERROR: Index must be greater than or equal to 1
+	____________________________________________________________
+
+	____________________________________________________________
+	ERROR: Index must be greater than or equal to 1
+	____________________________________________________________
+
+	____________________________________________________________
+	ERROR: Index must be greater than or equal to 1
+	____________________________________________________________
+
+	____________________________________________________________
+	ERROR: Index must be greater than or equal to 1
+	____________________________________________________________
+
+	____________________________________________________________
 	Got it. I've added this task:
 		[T][ ] read book
 	Now you have 1 tasks in the list.
@@ -55,6 +71,174 @@
 	1. [T][X] read book
 	2. [D][ ] submit report (by: tomorrow)
 	3. [E][ ] team meeting (from: Mon 2pm to 4pm)
+	____________________________________________________________
+
+	____________________________________________________________
+	ERROR: Missing task name
+	Please enter a task name (e.g., todo borrow book).
+	____________________________________________________________
+
+	____________________________________________________________
+	Got it. I've added this task:
+		[T][ ] buy pajamas
+	Now you have 4 tasks in the list.
+	____________________________________________________________
+
+	____________________________________________________________
+	ERROR: Missing task name
+	Please enter a valid deadline (e.g., deadline return book /by Sunday).
+	____________________________________________________________
+
+	____________________________________________________________
+	ERROR: Missing deadline 
+	Please enter a valid deadline (e.g., deadline return book /by Sunday).
+	____________________________________________________________
+
+	____________________________________________________________
+	ERROR: Missing task name
+	Please enter a valid deadline (e.g., deadline return book /by Sunday).
+	____________________________________________________________
+
+	____________________________________________________________
+	ERROR: Missing '/by'
+	Please enter a valid deadline (e.g., deadline return book /by Sunday).
+	____________________________________________________________
+
+	____________________________________________________________
+	Got it. I've added this task:
+		[D][ ] buy goggles (by: Sunday)
+	Now you have 5 tasks in the list.
+	____________________________________________________________
+
+	____________________________________________________________
+	ERROR: Missing task name
+	Please enter event details (e.g., event project meeting /from Mon 2pm /to 4pm).
+	____________________________________________________________
+
+	____________________________________________________________
+	ERROR: Missing task name 
+	Please enter event details (e.g., event project meeting /from Mon 2pm /to 4pm).
+	____________________________________________________________
+
+	____________________________________________________________
+	ERROR: Missing task name 
+	Please enter event details (e.g., event project meeting /from Mon 2pm /to 4pm).
+	____________________________________________________________
+
+	____________________________________________________________
+	ERROR: Missing task name 
+	Please enter event details (e.g., event project meeting /from Mon 2pm /to 4pm).
+	____________________________________________________________
+
+	____________________________________________________________
+	ERROR: Missing task name 
+	Please enter event details (e.g., event project meeting /from Mon 2pm /to 4pm).
+	____________________________________________________________
+
+	____________________________________________________________
+	ERROR: Missing '/from' or '/to'
+	Please enter event details (e.g., event project meeting /from Mon 2pm /to 4pm).
+	____________________________________________________________
+
+	____________________________________________________________
+	ERROR: Missing '/from' or '/to'
+	Please enter event details (e.g., event project meeting /from Mon 2pm /to 4pm).
+	____________________________________________________________
+
+	____________________________________________________________
+	ERROR: Missing '/from' or '/to'
+	Please enter event details (e.g., event project meeting /from Mon 2pm /to 4pm).
+	____________________________________________________________
+
+	____________________________________________________________
+	ERROR: Missing '/from' or '/to'
+	Please enter event details (e.g., event project meeting /from Mon 2pm /to 4pm).
+	____________________________________________________________
+
+	____________________________________________________________
+	ERROR: Missing '/from' or '/to'
+	Please enter event details (e.g., event project meeting /from Mon 2pm /to 4pm).
+	____________________________________________________________
+
+	____________________________________________________________
+	ERROR: Missing end date 
+	Please enter event details (e.g., event project meeting /from Mon 2pm /to 4pm).
+	____________________________________________________________
+
+	____________________________________________________________
+	ERROR: Missing start date 
+	Please enter event details (e.g., event project meeting /from Mon 2pm /to 4pm).
+	____________________________________________________________
+
+	____________________________________________________________
+	Got it. I've added this task:
+		[E][ ] project meeting (from: Monday 2pm to 4pm)
+	Now you have 6 tasks in the list.
+	____________________________________________________________
+
+	____________________________________________________________
+	Here are the tasks in your list:
+	1. [T][X] read book
+	2. [D][ ] submit report (by: tomorrow)
+	3. [E][ ] team meeting (from: Mon 2pm to 4pm)
+	4. [T][ ] buy pajamas
+	5. [D][ ] buy goggles (by: Sunday)
+	6. [E][ ] project meeting (from: Monday 2pm to 4pm)
+	____________________________________________________________
+
+	____________________________________________________________
+	Here are the tasks in your list:
+	1. [T][X] read book
+	2. [D][ ] submit report (by: tomorrow)
+	3. [E][ ] team meeting (from: Mon 2pm to 4pm)
+	4. [T][ ] buy pajamas
+	5. [D][ ] buy goggles (by: Sunday)
+	6. [E][ ] project meeting (from: Monday 2pm to 4pm)
+	____________________________________________________________
+
+	____________________________________________________________
+	ERROR: Invalid item index.
+	Item index out of bounds. Please select a valid index in the list above
+	____________________________________________________________
+
+	____________________________________________________________
+	Here are the tasks in your list:
+	1. [T][X] read book
+	2. [D][ ] submit report (by: tomorrow)
+	3. [E][ ] team meeting (from: Mon 2pm to 4pm)
+	4. [T][ ] buy pajamas
+	5. [D][ ] buy goggles (by: Sunday)
+	6. [E][ ] project meeting (from: Monday 2pm to 4pm)
+	____________________________________________________________
+
+	____________________________________________________________
+	ERROR: Invalid item index.
+	Item index out of bounds. Please select a valid index in the list above
+	____________________________________________________________
+
+	____________________________________________________________
+	Nice! I've marked this task as done:
+		[D][X] submit report (by: tomorrow)
+	____________________________________________________________
+
+	____________________________________________________________
+	Nice! I've marked this task as done:
+		[E][X] team meeting (from: Mon 2pm to 4pm)
+	____________________________________________________________
+
+	____________________________________________________________
+	OK, I've marked this task as not done yet:
+		[D][ ] submit report (by: tomorrow)
+	____________________________________________________________
+
+	____________________________________________________________
+	Here are the tasks in your list:
+	1. [T][X] read book
+	2. [D][ ] submit report (by: tomorrow)
+	3. [E][X] team meeting (from: Mon 2pm to 4pm)
+	4. [T][ ] buy pajamas
+	5. [D][ ] buy goggles (by: Sunday)
+	6. [E][ ] project meeting (from: Monday 2pm to 4pm)
 	____________________________________________________________
 
 	____________________________________________________________
