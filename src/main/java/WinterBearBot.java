@@ -1,57 +1,92 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class WinterBearBot {
 
     private static String HORIZONTAL_LINE = "\t____________________________________________________________\n";
 
     /**
-     * Level-0: Displays welcome message
+     * Helper method to print horizontal line with tabs, along with the given msg
+     * @param msg
      */
-    public static void displayWelcomeMessage() {
-        String welcomeMessage = HORIZONTAL_LINE;
-        welcomeMessage += "\tHello! I'm WinterBearBot\n";
-        welcomeMessage += "\tWhat can I do for you?\n";
-        welcomeMessage += HORIZONTAL_LINE;
-        System.out.println(welcomeMessage);
+    public static void prettyPrint(String msg) {
+        System.out.print(HORIZONTAL_LINE);
+        System.out.println(msg);
+        System.out.println(HORIZONTAL_LINE);
     }
 
     /**
-     * Helper method for Level-1 to print all items in the list
+     * Level-0: Displays welcome message
+     */
+    public static void displayWelcomeMessage() {
+        prettyPrint("\tHello! I'm WinterBearBot\n\tWhat can I do for you?");
+    }
+
+    /**
+     * Helper method to print all items in the taskList
      * @param list
      */
-    public static void printList(String[] list) {
+    public static void printList(ArrayList<Task> list) {
         System.out.print(HORIZONTAL_LINE);
-        for (int i = 0; i < list.length; i++) {
-            if (list[i] == null)
-                break;
-            System.out.println("\t" + i + ". " + list[i]);
+        System.out.println("\tHere are the tasks in your list:");
+        for (int i = 0; i < list.size(); i++) {
+            Task item = list.get(i);
+            System.out.printf("\t%d. %s %s%n", (i+1), item.getStatusIcon(), item.getDescription());
         }
         System.out.println(HORIZONTAL_LINE);
     }
 
     /**
-     * Level-1: Echo user commands (inputs)
+     * Change item status to either "Done" or "Undone"
+     * @param item
+     * @param command
      */
-    public static void storeListInput() {
+    public static void changeItemStatus(Task item, String command) {
+        String msg = "";
+        if (command.startsWith("mark")) {
+            item.setDone();
+            msg = "\tNice! I've marked this task as done:";
+        }
+        else {
+            item.setUndone();
+            msg = "\tOK, I've marked this task as not done yet:";
+        }
+        prettyPrint(msg + "\n\t\t" + item.getStatusIcon() + " " + item.getDescription());
+    }
+
+    /**
+     * Level-1: Echo user commands (inputs)
+     * Level-2: Add inputs to list
+     * Level-3: Mark as done
+     */
+    public static void manageTaskList() {
         // Initialise variables
-        int idx = 0;
-        String[] list = new String[100];
-        String input = "";
         Scanner sc = new Scanner(System.in);
+        ArrayList<Task> taskList = new ArrayList<>();
+        String command = "";
 
         while (true) {
-            input = sc.nextLine();
+            // Get user command
+            command = sc.nextLine();
 
-            if (input.equalsIgnoreCase("list")) {
-                printList(list);
+            // Interpret Commands
+            if (command.equalsIgnoreCase("list")) {
+                printList(taskList);
                 continue;
             }
-            else if (input.equalsIgnoreCase("bye"))
+
+            else if (command.equalsIgnoreCase("bye"))
                 break;
 
-            list[idx] = input;
-            idx++;
-            System.out.println(HORIZONTAL_LINE + "\tadded: " + input + "\n" + HORIZONTAL_LINE);
+            else if (command.startsWith("mark") || command.startsWith("unmark")) {
+                int itemIdx = Integer.parseInt(command.split(" ")[1]) - 1; // -1 for array indexing
+                Task item = taskList.get(itemIdx);
+                changeItemStatus(item, command);
+                continue;
+            }
+
+            taskList.add(new Task(command));
+            prettyPrint("\tadded: " + command);
         }
     }
 
@@ -59,15 +94,12 @@ public class WinterBearBot {
      * Display message before the end of the program
      */
     public static void displayFarewellMessage() {
-        String farewellMessage = HORIZONTAL_LINE;
-        farewellMessage += "\tBye. Hope to see you again soon!\n";
-        farewellMessage += HORIZONTAL_LINE;
-        System.out.println(farewellMessage);
+        prettyPrint("\tBye. Hope to see you again soon!");
     }
 
     public static void main(String[] args) {
         displayWelcomeMessage();
-        storeListInput();
+        manageTaskList();
         displayFarewellMessage();
     }
 }
