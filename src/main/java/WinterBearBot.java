@@ -7,7 +7,7 @@ public class WinterBearBot {
     /**
      * Level-0: Displays welcome message
      */
-    public static void DisplayWelcomeMessage() {
+    public static void displayWelcomeMessage() {
         String welcomeMessage = HORIZONTAL_LINE;
         welcomeMessage += "\tHello! I'm WinterBearBot\n";
         welcomeMessage += "\tWhat can I do for you?\n";
@@ -16,23 +16,49 @@ public class WinterBearBot {
     }
 
     /**
+     * Helper method for Level-1 to print all items in the list
+     * @param list
+     */
+    public static void printList(String[] list) {
+        System.out.print(HORIZONTAL_LINE);
+        for (int i = 0; i < list.length; i++) {
+            if (list[i] == null)
+                break;
+            System.out.println("\t" + i + ". " + list[i]);
+        }
+        System.out.println(HORIZONTAL_LINE);
+    }
+
+    /**
      * Level-1: Echo user commands (inputs)
      */
-    public static void EchoInput() {
+    public static void storeListInput() {
+        // Initialise variables
+        int idx = 0;
+        String[] list = new String[100];
         String input = "";
+        Scanner sc = new Scanner(System.in);
+
         while (true) {
-            Scanner sc = new Scanner(System.in);
             input = sc.nextLine();
-            if (input.equalsIgnoreCase("bye"))
+
+            if (input.equalsIgnoreCase("list")) {
+                printList(list);
+                continue;
+            }
+            else if (input.equalsIgnoreCase("bye"))
                 break;
-            System.out.println(HORIZONTAL_LINE + "\t" + input + "\n" + HORIZONTAL_LINE);
+
+            list[idx] = input;
+            idx++;
+            System.out.println(HORIZONTAL_LINE + "\tadded: " + input + "\n" + HORIZONTAL_LINE);
         }
     }
 
     /**
      * Display message before the end of the program
      */
-    public static void DisplayFarewellMessage() {
+    public static void displayFarewellMessage() {
         String farewellMessage = HORIZONTAL_LINE;
         farewellMessage += "\tBye. Hope to see you again soon!\n";
         farewellMessage += HORIZONTAL_LINE;
@@ -40,8 +66,8 @@ public class WinterBearBot {
     }
 
     public static void main(String[] args) {
-        DisplayWelcomeMessage();
-        EchoInput();
-        DisplayFarewellMessage();
+        displayWelcomeMessage();
+        storeListInput();
+        displayFarewellMessage();
     }
 }
