@@ -23,7 +23,7 @@ public class WinterBearBot {
      */
 
     /*
-     * Legend: C1 = Core Method 1, H1 = Helper Method 1
+     * Legend: C1 = Core Method 1, H1 = Helper Method 1.
      * Flow:
      * The main() method calls:
      * - displayWelcomeMessage() [C1]
