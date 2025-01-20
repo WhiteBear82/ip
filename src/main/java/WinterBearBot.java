@@ -17,6 +17,7 @@ public class WinterBearBot {
      * 3. printList - to print the tasks in the taskList.
      * 4. changeItemStatus - either set a task to "Done" or "Undone".
      * 5. addTask - to add an item into taskList.
+     * 6. deleteTask - to delete an item from taskList.
      *
      * Other helper methods, e.g. 4a, 5b, 5b-1, are specific to 4, 5, and 5b respectively, mostly used for validation.
      */
@@ -44,6 +45,11 @@ public class WinterBearBot {
      *          ---> validateAndGetTaskNameFromTo() [H5c-2]
      *          ---> validateAndGetFromTo() [H5c-3]
      *      --> prettyPrint [H1]
+     *   -> deleteTask() [H6]
+     *      --> validateAndGetItemIdx() [H4a]
+     *      --> validateItemIdxForTaskList() [H4b]
+     *          --> prettyPrint() [H1]
+     *      --> prettyPrint() [H1]
      * - displayFarewellMessage() [H2]
      *   -> prettyPrint() [H1]
      */
@@ -326,6 +332,7 @@ public class WinterBearBot {
      * Level-3: Mark as done.
      * Level-4: ToDos, Events, Deadlines.
      * Level-5: Handle errors.
+     * Level-6: Delete.
      */
     public static void manageTaskList() {
         // Initialise variables
@@ -361,7 +368,7 @@ public class WinterBearBot {
                         deleteTask(taskList, command);
                         break;
                     default:
-                        throw new WBBException("\tERROR: Invalid command (valid commands are: list, todo, deadline, event, mark, unmark, bye)");
+                        throw new WBBException("\tERROR: Invalid command (valid commands are: list, todo, deadline, event, mark, unmark, delete, bye)");
                 }
             } catch (WBBException e) {
                 prettyPrint(e.getMessage());
