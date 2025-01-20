@@ -1,4 +1,12 @@
-package PACKAGE_NAME;
-
-public class WBBException {
+/**
+ * WinterBearBot Exception Class.
+ */
+public class WBBException extends Exception {
+    /**
+     * To construct the desired error message
+     * @param message The error message
+     */
+    public WBBException(String message) {
+        super(message);
+    }
 }

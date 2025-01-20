@@ -9,8 +9,8 @@ public class Todo extends Task{
 
 
     /**
-     * toString method for this class
-     * @return The string
+     * toString method for this class.
+     * @return The string.
      */
     @Override
     public String toString() {

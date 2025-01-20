@@ -4,9 +4,9 @@ public class Event extends Task{
 
     /**
      * Event which is has a description, start date/time and end date/time.
-     * @param description The name of the task
-     * @param from The start date/time
-     * @param to The end date/time
+     * @param description The name of the task.
+     * @param from The start date/time.
+     * @param to The end date/time.
      */
     public Event(String description, String from, String to) {
         super(description);
@@ -16,8 +16,8 @@ public class Event extends Task{
 
 
     /**
-     * toString method for this class
-     * @return The string
+     * toString method for this class.
+     * @return The string.
      */
     @Override
     public String toString() {
