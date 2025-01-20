@@ -137,7 +137,7 @@ public class WinterBearBot {
      */
     private static void validateItemIdxForTaskList(ArrayList<Task> taskList, int itemIdx) throws WBBException {
         if (taskList.isEmpty())
-            throw new WBBException("\tERROR: Task list is empty. Nothing to mark or unmark.");
+            throw new WBBException("\tERROR: Task list is empty. Nothing to do.");
         if (itemIdx >= taskList.size()) {  // Potential error input: "mark 100" when list only has 1 element
             printList(taskList);
             throw new WBBException("\tERROR: Invalid item index.\n\tItem index out of bounds. Please select a valid index in the list above");
@@ -291,6 +291,24 @@ public class WinterBearBot {
         return fromTo;
     }
 
+    /**
+     * Helper method 6 to delete tasks.
+     * @param taskList The taskList
+     * @param command The user command (e.g. delete 3)
+     * @throws WBBException if itemIdx is invalid (non-positive, non-integer, out of bounds) or taskList is empty.
+     */
+    public static void deleteTask(ArrayList<Task> taskList, String command) throws WBBException {
+        // Validate itemIdx and taskList before continuing
+        int itemIdx = validateAndGetItemIdx(command);
+        validateItemIdxForTaskList(taskList, itemIdx);
+
+        // Validation passed, continue running main program logic (i.e. to delete the item)
+        Task taskName = taskList.get(itemIdx);
+        taskList.remove(itemIdx);
+        String deleteTaskSuccessfulMsg = "\tNoted. I've removed this task:\n\t\t";
+        String totalTaskMsg = "\n\tNow you have " + taskList.size() + " tasks in the list.";
+        prettyPrint( deleteTaskSuccessfulMsg + taskName + totalTaskMsg);
+    }
 
     /**
      * Core method 1: to display welcome message for Level-0 task.
@@ -338,6 +356,9 @@ public class WinterBearBot {
                     case "deadline":
                     case "event":
                         addTask(taskList, command);
+                        break;
+                    case "delete":
+                        deleteTask(taskList, command);
                         break;
                     default:
                         throw new WBBException("\tERROR: Invalid command (valid commands are: list, todo, deadline, event, mark, unmark, bye)");
