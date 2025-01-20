@@ -20,6 +20,14 @@
 	____________________________________________________________
 
 	____________________________________________________________
+	ERROR: Index must be greater than or equal to 1
+	____________________________________________________________
+
+	____________________________________________________________
+	ERROR: Index must be greater than or equal to 1
+	____________________________________________________________
+
+	____________________________________________________________
 	Got it. I've added this task:
 		[T][ ] read book
 	Now you have 1 tasks in the list.
@@ -239,6 +247,35 @@
 	4. [T][ ] buy pajamas
 	5. [D][ ] buy goggles (by: Sunday)
 	6. [E][ ] project meeting (from: Monday 2pm to 4pm)
+	____________________________________________________________
+
+	____________________________________________________________
+	Noted. I've removed this task:
+		[E][X] team meeting (from: Mon 2pm to 4pm)
+	Now you have 5 tasks in the list.
+	____________________________________________________________
+
+	____________________________________________________________
+	Here are the tasks in your list:
+	1. [T][X] read book
+	2. [D][ ] submit report (by: tomorrow)
+	3. [T][ ] buy pajamas
+	4. [D][ ] buy goggles (by: Sunday)
+	5. [E][ ] project meeting (from: Monday 2pm to 4pm)
+	____________________________________________________________
+
+	____________________________________________________________
+	Noted. I've removed this task:
+		[D][ ] submit report (by: tomorrow)
+	Now you have 4 tasks in the list.
+	____________________________________________________________
+
+	____________________________________________________________
+	Here are the tasks in your list:
+	1. [T][X] read book
+	2. [T][ ] buy pajamas
+	3. [D][ ] buy goggles (by: Sunday)
+	4. [E][ ] project meeting (from: Monday 2pm to 4pm)
 	____________________________________________________________
 
 	____________________________________________________________
