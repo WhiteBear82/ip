@@ -1,7 +1,22 @@
 public enum TaskType {
-    TODO("todo", "Please enter a task name (e.g., todo borrow book)."),
-    DEADLINE("deadline", "Please enter a valid deadline (e.g., deadline return book /by Sunday)."),
-    EVENT("event", "Please enter event details (e.g., event project meeting /from Mon 2pm /to 4pm).");
+    TODO("todo", "Please enter a task name (e.g., todo borrow book).") {
+        @Override
+        public Task createTask(String[] parts) {
+            return new Todo(parts[2].trim());
+        }
+    },
+    DEADLINE("deadline", "Please enter a valid deadline (e.g., deadline return book /by Sunday).") {
+        @Override
+        public Task createTask(String[] parts) {
+            return new Deadline(parts[2].trim(), parts[3].trim());
+        }
+    },
+    EVENT("event", "Please enter event details (e.g., event project meeting /from Mon 2pm /to 4pm).") {
+        @Override
+        public Task createTask(String[] parts) {
+            return new Event(parts[2].trim(), parts[3].trim(), parts[4].trim());
+        }
+    };
 
     private final String type;
     private final String errorMessage;
@@ -36,4 +51,6 @@ public enum TaskType {
                 taskType = t;
         return taskType;
     }
+
+    public abstract Task createTask(String[] parts);
 }

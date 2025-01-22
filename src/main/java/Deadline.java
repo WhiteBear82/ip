@@ -21,4 +21,14 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
+
+
+    /**
+     * Provides a format for saving into hard disk.
+     * @return The desired format for saving into hard disk.
+     */
+    @Override
+    public String toFileFormat() {
+        return String.format("deadline | %b | %s | %s", isDone, description, by);
+    }
 }

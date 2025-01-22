@@ -23,4 +23,14 @@ public class Event extends Task{
     public String toString() {
         return "[E]" + super.toString() + " (from: " + from + " to " + to + ")";
     }
+
+
+    /**
+     * Provides a format for saving into hard disk.
+     * @return The desired format for saving into hard disk.
+     */
+    @Override
+    public String toFileFormat() {
+        return String.format("event | %b | %s | %s | %s", isDone, description, from, to);
+    }
 }

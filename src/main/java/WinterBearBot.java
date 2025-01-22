@@ -29,12 +29,14 @@ public class WinterBearBot {
      * - displayWelcomeMessage() [C1]
      *   -> prettyPrint() [H1]
      * - manageTaskList() [C2]
+     *   -> Storage.loadTasks()
      *   -> printList() [H3]
      *   -> changeItemStatus() [H4]
      *      --> validateAndGetItemIdx() [H4a]
      *      --> validateItemIdxForTaskList() [H4b]
      *          ---> prettyPrint() [H1]
      *      --> prettyPrint() [H1]
+     *      --> Storage.saveTasks()
      *   -> addTask() [H5]
      *      --> validateAndGetTaskName() [H5a]
      *      --> newDeadlineTask() [H5b]
@@ -45,11 +47,13 @@ public class WinterBearBot {
      *          ---> validateAndGetTaskNameFromTo() [H5c-2]
      *          ---> validateAndGetFromTo() [H5c-3]
      *      --> prettyPrint [H1]
+     *      --> Storage.saveTasks()
      *   -> deleteTask() [H6]
      *      --> validateAndGetItemIdx() [H4a]
      *      --> validateItemIdxForTaskList() [H4b]
      *          --> prettyPrint() [H1]
      *      --> prettyPrint() [H1]
+     *      --> Storage.saveTasks()
      * - displayFarewellMessage() [H2]
      *   -> prettyPrint() [H1]
      */
@@ -110,6 +114,7 @@ public class WinterBearBot {
             taskName.setUndone();
             prettyPrint("\tOK, I've marked this task as not done yet:\n\t\t" + taskName);
         }
+        Storage.saveTasks(taskList);
     }
 
     /**
@@ -175,6 +180,7 @@ public class WinterBearBot {
 
         // After validation success, continue with main program logic (i.e. add new Task to taskList)
         list.add(task);
+        Storage.saveTasks(list);
         String addTaskSuccessfulMsg = "\tGot it. I've added this task:\n\t\t";
         String totalTaskMsg = "\n\tNow you have " + list.size() + " tasks in the list.";
         prettyPrint( addTaskSuccessfulMsg + task + totalTaskMsg);
@@ -314,6 +320,7 @@ public class WinterBearBot {
         String deleteTaskSuccessfulMsg = "\tNoted. I've removed this task:\n\t\t";
         String totalTaskMsg = "\n\tNow you have " + taskList.size() + " tasks in the list.";
         prettyPrint( deleteTaskSuccessfulMsg + taskName + totalTaskMsg);
+        Storage.saveTasks(taskList);
     }
 
     /**
@@ -326,18 +333,19 @@ public class WinterBearBot {
 
 
     /**
-     * Core method 2: to manage the taskList for Levels 1-4 tasks.
+     * Core method 2: to manage the taskList.
      * Level-1: Echo user commands (inputs).
      * Level-2: Add inputs to list.
      * Level-3: Mark as done.
      * Level-4: ToDos, Events, Deadlines.
      * Level-5: Handle errors.
      * Level-6: Delete.
+     * Level-7: Save.
      */
     public static void manageTaskList() {
         // Initialise variables
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> taskList = new ArrayList<>();
+        ArrayList<Task> taskList = Storage.loadTasks();
         String command;
         String commandPrefix;
 
