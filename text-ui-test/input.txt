@@ -44,4 +44,8 @@ delete 3
 list
 delete 2
 list
+tasks
+deadline find cats /by 30/1/2025 1800
+deadline find dogs /by 31/1/2025
+tasks 
 bye
