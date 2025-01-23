@@ -1,3 +1,8 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -211,7 +216,118 @@ public class WinterBearBot {
     private static Task newDeadlineTask(String taskName, TaskType taskType) throws WBBException {
         validateTaskNameBy(taskName, taskType);
         String[] taskNameBy = validateAndGetTaskNameBy(taskName, taskType);
-        return new Deadline(taskNameBy[0].trim(), taskNameBy[1].trim());
+
+        String deadline = taskNameBy[1].trim();
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/M/yyyy");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+
+
+        // Try date-time parsing and get formatted string
+        String result = tryParseDateTime(deadline, dateTimeFormatter);
+        if (result != null)
+            deadline = result;
+
+        // Try date-only parsing and get formatted string
+        result = tryParseDate(deadline, dateFormatter);
+        if (result != null)
+            deadline = result;
+
+        // Try time-only parsing and get formatted string
+        result = tryParseTime(deadline, timeFormatter);
+        if (result != null)
+            deadline = result;
+
+        return new Deadline(taskNameBy[0].trim(), deadline);
+    }
+
+    /**
+     * Tries to parse String to LocalDateTime.
+     * @param dateTimeString The String to be parsed.
+     * @param formatter The DateTimeFormatter.
+     * @return The parsed LocalDateTime, if possible, otherwise null.
+     */
+    private static String tryParseDateTime(String dateTimeString, DateTimeFormatter formatter) {
+        try {
+            LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, formatter);
+            if (dateTime.isBefore(LocalDateTime.now()))
+                return null;
+            return formatDateTime(dateTime);
+        } catch (DateTimeParseException e) {
+            return null;
+        }
+    }
+
+    /**
+     * Tries to parse String to LocalDate.
+     * @param dateString The String to be parsed.
+     * @param formatter The DateTimeFormatter.
+     * @return The parsed LocalDate, if possible, otherwise null.
+     */
+    private static String tryParseDate(String dateString, DateTimeFormatter formatter) {
+        try {
+            LocalDate date = LocalDate.parse(dateString, formatter);
+            if (date.isBefore(LocalDate.now()))
+                return null;
+            return formatDate(date);
+        } catch (DateTimeParseException e) {
+            return null;
+        }
+    }
+
+    /**
+     * Tries to parse String to LocalTime.
+     * @param timeString The String to be parsed.
+     * @param formatter The DateTimeFormatter.
+     * @return The parsed LocalTime, if possible, otherwise null.
+     */
+    private static String tryParseTime(String timeString, DateTimeFormatter formatter) {
+        try {
+            LocalTime time = LocalTime.parse(timeString, formatter);
+            LocalDateTime dateTime = LocalDateTime.of(LocalDate.now(), time); // Default to today's date
+            if (dateTime.isBefore(LocalDateTime.now()))
+                return null;
+            return formatDateTime(dateTime);
+        } catch (DateTimeParseException e) {
+            return null;
+        }
+    }
+
+    /**
+     * Converts a LocalDateTime to friendly print format, e.g., 15th of January 2025, 7:30pm.
+     * @param dateTime The LocalDateTime.
+     * @return A friendly print format.
+     */
+    private static String formatDateTime(LocalDateTime dateTime) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMMM yyyy, h:mma");
+        return ordinalDay(dateTime.getDayOfMonth()) + " of " + dateTime.format(dateTimeFormatter);
+    }
+
+    /**
+     * Converts a LocalDateTime to friendly print format, e.g., 15th of January 2025.
+     * @param date The LocalDate.
+     * @return A friendly print format.
+     */
+    private static String formatDate(LocalDate date) {
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMMM yyyy");
+        return ordinalDay(date.getDayOfMonth()) + " of " + date.format(dateFormatter);
+    }
+
+    /**
+     * Add "st", "nd", "rd", or "th" depending on the day, e.g. 1 -> 1st.
+     * @param day The day in number.
+     * @return The appended format.
+     */
+    private static String ordinalDay(int day) {
+        if (day >= 11 && day <= 13) {
+            return day + "th";
+        }
+        return switch (day % 10) {
+            case 1 -> day + "st";
+            case 2 -> day + "nd";
+            case 3 -> day + "rd";
+            default -> day + "th";
+        };
     }
 
     /**
@@ -324,13 +440,41 @@ public class WinterBearBot {
     }
 
     /**
+     * Displays all tasks that are due today.
+     * @param taskList The taskList.
+     */
+    public static void displayTodayTasks(ArrayList<Task> taskList) {
+        ArrayList<Task> tasksDueToday = getTasksDueToday(taskList);
+        if (tasksDueToday.isEmpty())
+            System.out.println("No tasks are due today.");
+        else {
+            System.out.println("Tasks due today:");
+            for (Task task : tasksDueToday) {
+                System.out.println(task);
+            }
+        }
+    }
+
+    /**
+     * Retrieves tasks that are due today.
+     * @param tasks The taskList.
+     * @return The task that is due today.
+     */
+    public static ArrayList<Task> getTasksDueToday(ArrayList<Task> tasks) {
+        ArrayList<Task> tasksDueToday = new ArrayList<>();
+        for (Task task : tasks)
+            if (task.isDueToday())
+                tasksDueToday.add(task);
+        return tasksDueToday;
+    }
+
+    /**
      * Core method 1: to display welcome message for Level-0 task.
      * Level-0: Displays welcome message.
      */
     public static void displayWelcomeMessage() {
         prettyPrint("\tHello! I'm WinterBearBot\n\tWhat can I do for you?");
     }
-
 
     /**
      * Core method 2: to manage the taskList.
@@ -341,6 +485,7 @@ public class WinterBearBot {
      * Level-5: Handle errors.
      * Level-6: Delete.
      * Level-7: Save.
+     * Level-8: Dates and Times.
      */
     public static void manageTaskList() {
         // Initialise variables
@@ -375,8 +520,11 @@ public class WinterBearBot {
                     case "delete":
                         deleteTask(taskList, command);
                         break;
+                    case "tasks":
+                        displayTodayTasks(taskList);
+                        break;
                     default:
-                        throw new WBBException("\tERROR: Invalid command (valid commands are: list, todo, deadline, event, mark, unmark, delete, bye)");
+                        throw new WBBException("\tERROR: Invalid command (valid commands are: list, todo, deadline, event, mark, unmark, delete, tasks, bye)");
                 }
             } catch (WBBException e) {
                 prettyPrint(e.getMessage());

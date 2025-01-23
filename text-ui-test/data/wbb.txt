@@ -1,0 +1,6 @@
+todo | true | read book
+todo | false | buy pajamas
+deadline | false | buy goggles | Sunday
+event | false | project meeting | Monday 2pm | 4pm
+deadline | false | find cats | 30th of January 2025, 6:00PM
+deadline | false | find dogs | 31st of January 2025

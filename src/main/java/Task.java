@@ -51,4 +51,12 @@ public abstract class Task {
     }
 
     public abstract String toFileFormat();
+
+    /**
+     * For deadline class, which has a method for override, other tasks default to not having due date.
+     * @return False.
+     */
+    public boolean isDueToday() {
+        return false;
+    }
 }

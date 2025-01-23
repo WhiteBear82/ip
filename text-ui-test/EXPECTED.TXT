@@ -278,6 +278,20 @@
 	4. [E][ ] project meeting (from: Monday 2pm to 4pm)
 	____________________________________________________________
 
+No tasks are due today.
+	____________________________________________________________
+	Got it. I've added this task:
+		[D][ ] find cats (by: 30th of January 2025, 6:00PM)
+	Now you have 5 tasks in the list.
+	____________________________________________________________
+
+	____________________________________________________________
+	Got it. I've added this task:
+		[D][ ] find dogs (by: 31st of January 2025)
+	Now you have 6 tasks in the list.
+	____________________________________________________________
+
+No tasks are due today.
 	____________________________________________________________
 	Bye. Hope to see you again soon!
 	____________________________________________________________
