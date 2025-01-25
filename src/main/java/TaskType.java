@@ -52,5 +52,10 @@ public enum TaskType {
         return taskType;
     }
 
+    /**
+     * Create a task (e.g. Todo, Deadline, or Event)
+     * @param parts The parts of the user input command (e.g. ["deadline", "return book", "/by", "Sunday"]
+     * @return The Task.
+     */
     public abstract Task createTask(String[] parts);
 }

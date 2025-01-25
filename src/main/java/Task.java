@@ -50,6 +50,10 @@ public abstract class Task {
         return this.getStatusIcon() + " " + this.getDescription();
     }
 
+    /**
+     * Provides a format for saving into hard disk.
+     * @return The desired format for saving into hard disk.
+     */
     public abstract String toFileFormat();
 
     /**

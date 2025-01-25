@@ -11,7 +11,7 @@ public class Storage {
      * Create the directory "./data" and/or the file "./data/wbb.txt" if it doesn't exist.
      */
     @SuppressWarnings("ResultOfMethodCallIgnored")
-    public static void setupFile() {
+    public void setupFile() {
         File file = new File(FILE_PATH);
         try {
             file.getParentFile().mkdirs();
@@ -25,7 +25,7 @@ public class Storage {
      * To save taskList into FILE_PATH.
      * @param taskList The taskList.
      */
-    public static void saveTasks(ArrayList<Task> taskList) {
+    public void saveTasks(ArrayList<Task> taskList) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
             for (Task task : taskList) {
                 writer.write(task.toFileFormat());
@@ -40,7 +40,7 @@ public class Storage {
      * To load contents of FILE_PATH into taskList.
      * @return The taskList.
      */
-    public static ArrayList<Task> loadTasks() {
+    public ArrayList<Task> loadTasks() {
         setupFile();
         ArrayList<Task> taskList = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
