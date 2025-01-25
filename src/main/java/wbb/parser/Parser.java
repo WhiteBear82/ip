@@ -30,7 +30,7 @@ public class Parser {
 
     /**
      * Parses the add command into subclasses of AddCommand.
-     * @param typeOfTask The type of task.
+     * @param typeOfTask The type of task (e.g. Todo, Deadline, Event).
      * @return The subclass of AddCommand.
      */
     public AddCommand parseAddCommand(String typeOfTask) {
