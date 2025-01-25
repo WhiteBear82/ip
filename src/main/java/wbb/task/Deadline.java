@@ -15,6 +15,14 @@ public class Deadline extends Task {
     }
 
     /**
+     * Getter for deadline.
+     * @return The deadline.
+     */
+    public String getBy() {
+        return by;
+    }
+
+    /**
      * Converts friendly print format to LocalDateTime/LocalDate, and returns the tasks that are due today.
      * @return The tasks that are due today.
      */

@@ -5,7 +5,7 @@ import wbb.task.Task;
 
 public class Ui {
     Scanner sc = new Scanner(System.in);
-    private static final String HORIZONTAL_LINE = "\t____________________________________________________________\n";
+    protected static final String HORIZONTAL_LINE = "\t____________________________________________________________\n";
 
     /**
      * Print horizontal line with tabs, along with the given msg.
