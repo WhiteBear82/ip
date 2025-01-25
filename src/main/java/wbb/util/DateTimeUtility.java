@@ -1,3 +1,4 @@
+package wbb.util;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -11,7 +12,7 @@ public class DateTimeUtility {
      * @param deadline The deadline.
      * @return The deadline, in LocalDate or LocalDateTime, if applicable.
      */
-    protected String tryParseDateAndOrTime(String deadline) {
+    public String tryParseDateAndOrTime(String deadline) {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/M/yyyy");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
@@ -39,7 +40,7 @@ public class DateTimeUtility {
      * @param formatter The DateTimeFormatter.
      * @return The parsed LocalDateTime, if possible, otherwise null.
      */
-    protected String tryParseDateTime(String dateTimeString, DateTimeFormatter formatter) {
+    public String tryParseDateTime(String dateTimeString, DateTimeFormatter formatter) {
         try {
             LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, formatter);
             if (dateTime.isBefore(LocalDateTime.now()))
@@ -56,7 +57,7 @@ public class DateTimeUtility {
      * @param formatter The DateTimeFormatter.
      * @return The parsed LocalDate, if possible, otherwise null.
      */
-    protected String tryParseDate(String dateString, DateTimeFormatter formatter) {
+    public String tryParseDate(String dateString, DateTimeFormatter formatter) {
         try {
             LocalDate date = LocalDate.parse(dateString, formatter);
             if (date.isBefore(LocalDate.now()))
@@ -73,7 +74,7 @@ public class DateTimeUtility {
      * @param formatter The DateTimeFormatter.
      * @return The parsed LocalTime, if possible, otherwise null.
      */
-    protected String tryParseTime(String timeString, DateTimeFormatter formatter) {
+    public String tryParseTime(String timeString, DateTimeFormatter formatter) {
         try {
             LocalTime time = LocalTime.parse(timeString, formatter);
             LocalDateTime dateTime = LocalDateTime.of(LocalDate.now(), time); // Default to today's date
@@ -90,7 +91,7 @@ public class DateTimeUtility {
      * @param dateTime The LocalDateTime.
      * @return A friendly print format.
      */
-    protected String formatDateTime(LocalDateTime dateTime) {
+    public String formatDateTime(LocalDateTime dateTime) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMMM yyyy, h:mma");
         return ordinalDay(dateTime.getDayOfMonth()) + " of " + dateTime.format(dateTimeFormatter);
     }
@@ -100,7 +101,7 @@ public class DateTimeUtility {
      * @param date The LocalDate.
      * @return A friendly print format.
      */
-    protected String formatDate(LocalDate date) {
+    public String formatDate(LocalDate date) {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMMM yyyy");
         return ordinalDay(date.getDayOfMonth()) + " of " + date.format(dateFormatter);
     }
@@ -110,7 +111,7 @@ public class DateTimeUtility {
      * @param day The day in number.
      * @return The appended format.
      */
-    protected String ordinalDay(int day) {
+    public String ordinalDay(int day) {
         if (day >= 11 && day <= 13) {
             return day + "th";
         }
@@ -127,7 +128,7 @@ public class DateTimeUtility {
      * @param day The day in number.
      * @return The un-appended format.
      */
-    protected String removeOrdinalDay(String day) {
+    public String removeOrdinalDay(String day) {
         return day.replaceAll("(\\d+)(st|nd|rd|th)", "$1");
     }
 
@@ -136,7 +137,7 @@ public class DateTimeUtility {
      * @param by The deadline.
      * @return True if the deadline is equals today, otherwise false.
      */
-    protected boolean isDueToday(String by) {
+    public boolean isDueToday(String by) {
         String normalizedDate = removeOrdinalDay(by);  // e.g. "23rd" -> "23"
 
         // List of possible date-time formats

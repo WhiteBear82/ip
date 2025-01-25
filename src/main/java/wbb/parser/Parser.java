@@ -1,5 +1,10 @@
+package wbb.parser;
+import wbb.ui.Ui;
+import wbb.command.*;
+import wbb.exception.WBBException;
+
 public class Parser {
-    protected Command parseCommand(String command, Ui ui) {
+    public Command parseCommand(String command, Ui ui) {
         String commandPrefix = command.split(" ")[0];
         try {
             return switch (commandPrefix) {
@@ -17,7 +22,7 @@ public class Parser {
         return null; // Should not reach here
     }
 
-    protected AddCommand parseAddCommand(String typeOfTask) {
+    public AddCommand parseAddCommand(String typeOfTask) {
         if (typeOfTask.equalsIgnoreCase("todo"))
             return new AddNewTodoCommand();
         else if (typeOfTask.equalsIgnoreCase("deadline"))

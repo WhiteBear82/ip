@@ -1,4 +1,10 @@
+package wbb.command;
 import java.util.ArrayList;
+import wbb.util.Validator;
+import wbb.task.Task;
+import wbb.ui.Ui;
+import wbb.storage.Storage;
+import wbb.exception.WBBException;
 
 public abstract class Command {
     protected Validator validator;
@@ -14,13 +20,13 @@ public abstract class Command {
      * @param storage The storage.
      * @throws WBBException if the command cannot be executed correctly.
      */
-    protected abstract void execute(ArrayList<Task> taskList, String command, Ui ui, Storage storage) throws WBBException;
+    public abstract void execute(ArrayList<Task> taskList, String command, Ui ui, Storage storage) throws WBBException;
 
     /**
      * Indicates whether the command is an Exit command.
      * @return True if the command is an Exit command, otherwise false.
      */
-    protected boolean isExit() {
+    public boolean isExit() {
         return false;
     }
 }

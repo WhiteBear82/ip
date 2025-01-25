@@ -1,4 +1,8 @@
+package wbb.command;
 import java.util.ArrayList;
+import wbb.task.Task;
+import wbb.ui.Ui;
+import wbb.storage.Storage;
 
 public class ListCommand extends Command {
     /**
@@ -8,7 +12,7 @@ public class ListCommand extends Command {
      * @param ui The ui.
      * @param storage The storage.
      */
-    protected void execute(ArrayList<Task> taskList, String command, Ui ui, Storage storage) {
+    public void execute(ArrayList<Task> taskList, String command, Ui ui, Storage storage) {
         ui.printList(taskList);
     }
 }

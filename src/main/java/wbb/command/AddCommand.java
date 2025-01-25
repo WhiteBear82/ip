@@ -1,4 +1,11 @@
+package wbb.command;
 import java.util.ArrayList;
+import wbb.exception.WBBException;
+import wbb.task.Task;
+import wbb.task.TaskType;
+import wbb.ui.Ui;
+import wbb.storage.Storage;
+import wbb.parser.Parser;
 
 public class AddCommand extends Command {
     /**
@@ -9,7 +16,8 @@ public class AddCommand extends Command {
      * @param storage The storage.
      * @throws WBBException if the command cannot be executed correctly.
      */
-    protected void execute(ArrayList<Task> taskList, String command, Ui ui, Storage storage) throws WBBException {
+    @Override
+    public void execute(ArrayList<Task> taskList, String command, Ui ui, Storage storage) throws WBBException {
         addTask(taskList, command, ui, storage);
     }
 
