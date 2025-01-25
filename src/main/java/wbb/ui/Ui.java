@@ -89,12 +89,31 @@ public class Ui {
      */
     public void printTasksDueToday(ArrayList<Task> tasksDueToday) {
         if (tasksDueToday.isEmpty())
-            System.out.println("No tasks are due today.");
+            System.out.println(HORIZONTAL_LINE + "\tNo tasks are due today.\n" + HORIZONTAL_LINE);
         else {
-            System.out.println("Tasks due today:");
+            System.out.print(HORIZONTAL_LINE);
+            System.out.println("\tTasks due today:");
             for (Task task : tasksDueToday) {
-                System.out.println(task);
+                System.out.println("\t" + task);
             }
+            System.out.println(HORIZONTAL_LINE);
+        }
+    }
+
+    /**
+     * Prints all tasks that are matched by the "find" command, if any.
+     * @param matchingTasks The tasks that are due today.
+     */
+    public void printMatchingTasks(ArrayList<Task> matchingTasks) {
+        if (matchingTasks.isEmpty())
+            System.out.println(HORIZONTAL_LINE + "\tNo matching tasks.\n" + HORIZONTAL_LINE);
+        else {
+            System.out.print(HORIZONTAL_LINE);
+            System.out.println("\tHere are the matching tasks in your list:");
+            for (int i = 0; i < matchingTasks.size(); i++) {
+                System.out.println("\t" + (i + 1) + ". " + matchingTasks.get(i));
+            }
+            System.out.println(HORIZONTAL_LINE);
         }
     }
 }
