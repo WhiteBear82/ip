@@ -118,4 +118,58 @@ class CommandTest {
 
         assertThrows(WBBException.class, () -> command.execute(taskList, input, ui, storage));
     }
+
+    @Test
+    void testFindCommand_withMatchingTasks() {
+        // Add tasks to the task list
+        taskList.add(new Todo("Read book"));
+        taskList.add(new Deadline("Submit book review", "2025-01-30"));
+        taskList.add(new Event("Book club meeting", "2025-02-01", "2025-02-01"));
+        taskList.add(new Todo("Go for a walk"));
+
+        FindCommand command = new FindCommand();
+        String input = "find book";
+
+        // Execute the command
+        assertDoesNotThrow(() -> command.execute(taskList, input, ui, storage));
+
+        // Check matching tasks
+        ArrayList<Task> matchingTasks = command.getMatchingTasks("book", taskList);
+        assertEquals(3, matchingTasks.size());
+        assertTrue(matchingTasks.stream().anyMatch(task -> task.getDescription().equals("Read book")));
+        assertTrue(matchingTasks.stream().anyMatch(task -> task.getDescription().equals("Submit book review")));
+        assertTrue(matchingTasks.stream().anyMatch(task -> task.getDescription().equals("Book club meeting")));
+    }
+
+    @Test
+    void testFindCommand_withNoMatchingTasks() {
+        // Add tasks to the task list
+        taskList.add(new Todo("Clean the house"));
+        taskList.add(new Deadline("Submit assignment", "2025-01-30"));
+        taskList.add(new Event("Team meeting", "2025-02-01", "2025-02-01"));
+
+        FindCommand command = new FindCommand();
+        String input = "find book";
+
+        // Execute the command
+        assertDoesNotThrow(() -> command.execute(taskList, input, ui, storage));
+
+        // Check matching tasks
+        ArrayList<Task> matchingTasks = command.getMatchingTasks("book", taskList);
+        assertTrue(matchingTasks.isEmpty());
+    }
+
+    @Test
+    void testFindCommand_withEmptyTaskList() {
+        FindCommand command = new FindCommand();
+        String input = "find book";
+
+        // Execute the command
+        assertDoesNotThrow(() -> command.execute(taskList, input, ui, storage));
+
+        // Check matching tasks
+        ArrayList<Task> matchingTasks = command.getMatchingTasks("book", taskList);
+        assertTrue(matchingTasks.isEmpty());
+    }
+
 }

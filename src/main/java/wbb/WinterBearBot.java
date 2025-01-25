@@ -33,12 +33,13 @@ public class WinterBearBot {
             try {
                 String command = ui.readCommand();
                 Command c = parser.parseCommand(command, ui);
+                if (c == null)
+                    continue;
                 c.execute(taskList, command, ui, storage);
                 isExit = c.isExit();
             } catch (WBBException e) {
                 ui.printErrorMsg(e.getMessage());
             }
-
         }
     }
 

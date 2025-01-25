@@ -20,12 +20,13 @@ public class Parser {
                 case "todo", "deadline", "event" -> new AddCommand();
                 case "delete" -> new DeleteCommand();
                 case "tasks" -> new DisplayTasksCommand();
-                default -> throw new WBBException("\tERROR: Invalid command (valid commands are: list, todo, deadline, event, mark, unmark, delete, tasks, bye)");
+                case "find" -> new FindCommand();
+                default -> throw new WBBException("\tERROR: Invalid command (valid commands are: list, todo, deadline, event, mark, unmark, delete, tasks, find, bye)");
             };
         } catch (WBBException e) {
             ui.prettyPrint(e.getMessage());
         }
-        return null; // Should not reach here
+        return null;
     }
 
     /**
