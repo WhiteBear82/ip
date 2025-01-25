@@ -9,10 +9,10 @@ import wbb.exception.WBBException;
 
 public class WinterBearBot {
 
-    private final Ui ui;
-    private final Storage storage;
-    private final Parser parser;
-    private final ArrayList<Task> taskList;
+    protected Ui ui;
+    protected Storage storage;
+    protected Parser parser;
+    protected ArrayList<Task> taskList;
 
     /**
      * Constructor to initialise new Ui, Storage, TaskList, Parser, and load Tasks from Storage.
