@@ -1,5 +1,8 @@
+package wbb.storage;
 import java.io.*;
 import java.util.ArrayList;
+import wbb.task.Task;
+import wbb.task.TaskType;
 
 /**
  * Handle loading and saving tasks from and to a file.

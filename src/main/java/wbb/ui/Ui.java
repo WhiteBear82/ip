@@ -1,5 +1,7 @@
+package wbb.ui;
 import java.util.ArrayList;
 import java.util.Scanner;
+import wbb.task.Task;
 
 public class Ui {
     Scanner sc = new Scanner(System.in);

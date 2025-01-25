@@ -1,6 +1,7 @@
+package wbb.task;
 public abstract class Task {
     protected String description;
-    protected boolean isDone;
+    public boolean isDone;
 
     /**
      * Constructor.

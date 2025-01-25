@@ -1,4 +1,11 @@
+package wbb;
 import java.util.ArrayList;
+import wbb.ui.Ui;
+import wbb.storage.Storage;
+import wbb.parser.Parser;
+import wbb.task.Task;
+import wbb.command.Command;
+import wbb.exception.WBBException;
 
 public class WinterBearBot {
 

@@ -1,3 +1,4 @@
+package wbb.task;
 public enum TaskType {
     TODO("todo", "Please enter a task name (e.g., todo borrow book).") {
         @Override

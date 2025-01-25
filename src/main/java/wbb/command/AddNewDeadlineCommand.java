@@ -1,4 +1,11 @@
+package wbb.command;
 import java.util.ArrayList;
+import wbb.task.*;
+import wbb.task.TaskType;
+import wbb.ui.Ui;
+import wbb.storage.Storage;
+import wbb.util.DateTimeUtility;
+import wbb.exception.WBBException;
 
 public class AddNewDeadlineCommand extends AddCommand {
     /**
@@ -8,7 +15,7 @@ public class AddNewDeadlineCommand extends AddCommand {
      * @throws WBBException if missing "/by", deadline or taskName.
      */
     @Override
-    protected void exec(String taskName, TaskType taskType, ArrayList<Task> taskList, Ui ui, Storage storage) throws WBBException {
+    public void exec(String taskName, TaskType taskType, ArrayList<Task> taskList, Ui ui, Storage storage) throws WBBException {
         validator.validateTaskNameBy(taskName, taskType);
         String[] taskNameBy = validator.validateAndGetTaskNameBy(taskName, taskType);
         String deadline = new DateTimeUtility().tryParseDateAndOrTime(taskNameBy[1].trim());

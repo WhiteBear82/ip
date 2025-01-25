@@ -1,3 +1,5 @@
+package wbb.exception;
+
 /**
  * WinterBearBot Exception Class.
  */
