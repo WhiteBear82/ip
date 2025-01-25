@@ -35,6 +35,14 @@ public abstract class Task {
     }
 
     /**
+     * Getter for isDone.
+     * @return isDone.
+     */
+    public boolean isDone() {
+        return isDone;
+    }
+
+    /**
      * Provides [ ] if task is not done, otherwise [X].
      * @return [ ] if task is not done, otherwise [X].
      */
