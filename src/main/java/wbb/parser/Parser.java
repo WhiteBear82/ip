@@ -4,6 +4,12 @@ import wbb.command.*;
 import wbb.exception.WBBException;
 
 public class Parser {
+    /**
+     * Parses the original command into subclasses of Command.
+     * @param command The original user command
+     * @param ui The ui instance.
+     * @return The subclass of Command.
+     */
     public Command parseCommand(String command, Ui ui) {
         String commandPrefix = command.split(" ")[0];
         try {
@@ -22,6 +28,11 @@ public class Parser {
         return null; // Should not reach here
     }
 
+    /**
+     * Parses the add command into subclasses of AddCommand.
+     * @param typeOfTask The type of task.
+     * @return The subclass of AddCommand.
+     */
     public AddCommand parseAddCommand(String typeOfTask) {
         if (typeOfTask.equalsIgnoreCase("todo"))
             return new AddNewTodoCommand();
