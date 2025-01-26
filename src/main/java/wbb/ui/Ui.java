@@ -6,6 +6,7 @@ import wbb.task.Task;
 public class Ui {
     Scanner sc = new Scanner(System.in);
     protected static final String HORIZONTAL_LINE = "\t____________________________________________________________\n";
+    private final StringBuilder outputBuffer = new StringBuilder();
 
     /**
      * Print horizontal line with tabs, along with the given msg.
@@ -15,6 +16,7 @@ public class Ui {
         System.out.print(HORIZONTAL_LINE);
         System.out.println(msg);
         System.out.println(HORIZONTAL_LINE);
+        outputBuffer.append(msg.trim());
     }
 
     /**
@@ -23,6 +25,8 @@ public class Ui {
     public void displayWelcomeMessage() {
         prettyPrint("\tHello! I'm WinterBearBot\n\tWhat can I do for you?");
     }
+
+    public String getWelcomeMessage() { return "Hello! I'm WinterBearBot.\nWhat can I do for you?"; }
 
     /**
      * Display message before the end of the program.
@@ -59,6 +63,12 @@ public class Ui {
             System.out.printf("\t%d. %s%n", (i+1), item.toString());
         }
         System.out.println(HORIZONTAL_LINE);
+
+        outputBuffer.append("Here are the tasks in your list:\n");
+        for (int i = 0; i < list.size(); i++) {
+            Task item = list.get(i);
+            outputBuffer.append(i + 1).append(". ").append(item.toString()).append("\n");
+        }
     }
 
     /**
@@ -67,8 +77,8 @@ public class Ui {
      * @param taskName The taskName.
      */
     public void printAdditionSuccessfulMsg(int taskListSize, Task taskName) {
-        String addTaskSuccessfulMsg = "\tGot it. I've added this task:\n\t\t";
-        String totalTaskMsg = "\n\tNow you have " + taskListSize + " tasks in the list.";
+        String addTaskSuccessfulMsg = "Got it. I've added this task:\n\t";
+        String totalTaskMsg = "\nNow you have " + taskListSize + " tasks in the list.";
         prettyPrint( addTaskSuccessfulMsg + taskName + totalTaskMsg);
     }
 
@@ -78,8 +88,8 @@ public class Ui {
      * @param taskName The taskName.
      */
     public void printDeleteSuccessfulMsg(int taskListSize, Task taskName) {
-        String deleteTaskSuccessfulMsg = "\tNoted. I've removed this task:\n\t\t";
-        String totalTaskMsg = "\n\tNow you have " + taskListSize + " tasks in the list.";
+        String deleteTaskSuccessfulMsg = "Noted. I've removed this task:\n\t";
+        String totalTaskMsg = "\nNow you have " + taskListSize + " tasks in the list.";
         prettyPrint( deleteTaskSuccessfulMsg + taskName + totalTaskMsg);
     }
 
@@ -98,6 +108,14 @@ public class Ui {
             }
             System.out.println(HORIZONTAL_LINE);
         }
+
+        if (tasksDueToday.isEmpty())
+            prettyPrint("\tNo tasks are due today.");
+        else {
+            outputBuffer.append("Tasks due today:\n");
+            for (Task task : tasksDueToday)
+                outputBuffer.append(task).append("\n");
+        }
     }
 
     /**
@@ -108,12 +126,25 @@ public class Ui {
         if (matchingTasks.isEmpty())
             System.out.println(HORIZONTAL_LINE + "\tNo matching tasks.\n" + HORIZONTAL_LINE);
         else {
-            System.out.print(HORIZONTAL_LINE);
             System.out.println("\tHere are the matching tasks in your list:");
             for (int i = 0; i < matchingTasks.size(); i++) {
-                System.out.println("\t" + (i + 1) + ". " + matchingTasks.get(i));
+                System.out.println((i + 1) + ". " + matchingTasks.get(i));
             }
-            System.out.println(HORIZONTAL_LINE);
         }
+
+        if (matchingTasks.isEmpty()) {
+            prettyPrint("\tNo matching tasks.");
+        } else {
+            outputBuffer.append("Here are the matching tasks in your list:\n");
+            for (int i = 0; i < matchingTasks.size(); i++) {
+                outputBuffer.append(i + 1).append(". ").append(matchingTasks.get(i)).append("\n");
+            }
+        }
+    }
+
+    public String getLastOutput() {
+        String output = outputBuffer.toString();
+        outputBuffer.setLength(0);
+        return output;
     }
 }

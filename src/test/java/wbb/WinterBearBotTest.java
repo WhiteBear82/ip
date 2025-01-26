@@ -63,8 +63,8 @@ class WinterBearBotTest {
 
         // Create a task list with an invalid command
         String invalidCommand = "invalid";
-        assertThrows(NullPointerException.class, () -> {
-            Command invalidCommandObj = bot.parser.parseCommand(invalidCommand, bot.ui);
+        assertThrows(WBBException.class, () -> {
+            Command invalidCommandObj = bot.parser.parseCommand(invalidCommand);
             invalidCommandObj.execute(taskList, invalidCommand, bot.ui, bot.storage);
         });
     }

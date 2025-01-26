@@ -32,11 +32,11 @@ public class ChangeStatusCommand extends Command {
         Task taskName = taskList.get(itemIdx);
         if (command.startsWith("mark")) {
             taskName.setDone();
-            ui.prettyPrint("\tNice! I've marked this task as done:\n\t\t" + taskName);
+            ui.prettyPrint("Nice! I've marked this task as done:\n\t" + taskName);
         }
         else {
             taskName.setUndone();
-            ui.prettyPrint("\tOK, I've marked this task as not done yet:\n\t\t" + taskName);
+            ui.prettyPrint("OK, I've marked this task as not done yet:\n\t" + taskName);
         }
         storage.saveTasks(taskList);
     }
