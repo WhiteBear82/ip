@@ -28,7 +28,7 @@ public class Ui {
 
     /**
      * Provides welcome message to GUI.
-     * @return The welcome message
+     * @return The welcome message.
      */
     public String getWelcomeMessage() { return "Hello! I'm WinterBearBot.\nWhat can I do for you?"; }
 
