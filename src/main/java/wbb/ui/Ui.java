@@ -148,7 +148,7 @@ public class Ui {
 
     /**
      * Store and provides output for GUI.
-     * @return The output
+     * @return The output.
      */
     public String getLastOutput() {
         String output = outputBuffer.toString();
