@@ -26,6 +26,10 @@ public class Ui {
         prettyPrint("\tHello! I'm WinterBearBot\n\tWhat can I do for you?");
     }
 
+    /**
+     * Provides welcome message to GUI.
+     * @return The welcome message
+     */
     public String getWelcomeMessage() { return "Hello! I'm WinterBearBot.\nWhat can I do for you?"; }
 
     /**
