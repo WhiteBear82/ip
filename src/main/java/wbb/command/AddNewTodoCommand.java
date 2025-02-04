@@ -1,10 +1,16 @@
 package wbb.command;
-import java.util.ArrayList;
-import wbb.task.*;
-import wbb.task.TaskType;
-import wbb.ui.Ui;
-import wbb.storage.Storage;
 
+import java.util.ArrayList;
+
+import wbb.storage.Storage;
+import wbb.task.Task;
+import wbb.task.TaskType;
+import wbb.task.Todo;
+import wbb.ui.Ui;
+
+/**
+ * Add new Todo task to taskList.
+ */
 public class AddNewTodoCommand extends AddCommand {
     /**
      * To validate input and add/save new todo task.

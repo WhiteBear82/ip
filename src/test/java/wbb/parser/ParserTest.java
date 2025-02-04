@@ -1,6 +1,7 @@
 package wbb.parser;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 
@@ -8,11 +9,20 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import wbb.WinterBearBot;
+import wbb.command.AddCommand;
+import wbb.command.AddNewDeadlineCommand;
+import wbb.command.AddNewEventCommand;
+import wbb.command.AddNewTodoCommand;
+import wbb.command.ChangeStatusCommand;
+import wbb.command.Command;
+import wbb.command.DeleteCommand;
+import wbb.command.DisplayTasksCommand;
+import wbb.command.ExitCommand;
+import wbb.command.ListCommand;
 import wbb.exception.WBBException;
 import wbb.storage.Storage;
 import wbb.task.Task;
 import wbb.ui.Ui;
-import wbb.command.*;
 
 public class ParserTest {
 
@@ -41,14 +51,14 @@ public class ParserTest {
         // Simulate an invalid command that should cause an error message
         WinterBearBot bot = new WinterBearBot();
         ArrayList<Task> taskList = new ArrayList<>();
-        bot.ui = new Ui();  // Use real UI for testing
-        bot.storage = new Storage();  // Use real storage
-        bot.parser = new Parser();
+        bot.setUi(new Ui()); // Use real UI for testing
+        bot.setStorage(new Storage()); // Use real storage
+        bot.setParser(new Parser());
 
         String invalidCommand = "invalid";
         assertThrows(WBBException.class, () -> {
-            Command invalidCommandObj = bot.parser.parseCommand(invalidCommand);
-            invalidCommandObj.execute(taskList, invalidCommand, bot.ui, bot.storage);
+            Command invalidCommandObj = bot.getParser().parseCommand(invalidCommand);
+            invalidCommandObj.execute(taskList, invalidCommand, bot.getUi(), bot.getStorage());
         });
     }
 

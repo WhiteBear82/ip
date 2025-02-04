@@ -1,10 +1,15 @@
 package wbb.command;
+
 import java.util.ArrayList;
+
+import wbb.exception.WBBException;
+import wbb.storage.Storage;
 import wbb.task.Task;
 import wbb.ui.Ui;
-import wbb.storage.Storage;
-import wbb.exception.WBBException;
 
+/**
+ * Mark or unmark a task.
+ */
 public class ChangeStatusCommand extends Command {
     /**
      * Executes a given command.
@@ -33,8 +38,7 @@ public class ChangeStatusCommand extends Command {
         if (command.startsWith("mark")) {
             taskName.setDone();
             ui.prettyPrint("Nice! I've marked this task as done:\n\t" + taskName);
-        }
-        else {
+        } else {
             taskName.setUndone();
             ui.prettyPrint("OK, I've marked this task as not done yet:\n\t" + taskName);
         }

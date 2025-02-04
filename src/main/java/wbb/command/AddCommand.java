@@ -1,12 +1,17 @@
 package wbb.command;
+
 import java.util.ArrayList;
+
 import wbb.exception.WBBException;
+import wbb.parser.Parser;
+import wbb.storage.Storage;
 import wbb.task.Task;
 import wbb.task.TaskType;
 import wbb.ui.Ui;
-import wbb.storage.Storage;
-import wbb.parser.Parser;
 
+/**
+ * AddCommand to add tasks.
+ */
 public class AddCommand extends Command {
     /**
      * Executes a given command.
@@ -24,16 +29,16 @@ public class AddCommand extends Command {
     /**
      * To add task into the list.
      * Add item to list - Either "todo", "deadline" or "event".
-     * Format "todo": todo <taskName>
-     * Format "deadline": deadline <taskName> /by <when>
-     * Format "event": event <taskName> /from <start> /to <end>
+     * Format "todo": todo [taskName]
+     * Format "deadline": deadline [taskName] /by [when]
+     * Format "event": event [taskName] /from [start] /to [end]
      * @param list The taskList.
      * @param command The input command by the user.
      */
     public void addTask(ArrayList<Task> list, String command, Ui ui, Storage storage) throws WBBException {
-        String typeOfTask = command.split(" ")[0];  // "todo", "deadline", "event"
-        TaskType taskType = TaskType.fromString(typeOfTask);  // enum of typeOfTask
-        String taskName = validator.validateAndGetTaskName(command, typeOfTask, taskType);  // name of task
+        String typeOfTask = command.split(" ")[0]; // "todo", "deadline", "event"
+        TaskType taskType = TaskType.fromString(typeOfTask); // enum of typeOfTask
+        String taskName = validator.validateAndGetTaskName(command, typeOfTask, taskType); // name of task
 
         AddCommand addCommand = new Parser().parseAddCommand(typeOfTask);
         addCommand.exec(taskName, taskType, list, ui, storage);
@@ -61,5 +66,6 @@ public class AddCommand extends Command {
      * @param storage The storage.
      * @throws WBBException If it does not perform as expected.
      */
-    protected void exec(String taskName, TaskType taskType, ArrayList<Task> taskList, Ui ui, Storage storage) throws WBBException {}
+    protected void exec(String taskName, TaskType taskType,
+                        ArrayList<Task> taskList, Ui ui, Storage storage) throws WBBException {}
 }

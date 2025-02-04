@@ -1,10 +1,15 @@
 package wbb.util;
 import java.util.ArrayList;
+
+import wbb.exception.WBBException;
 import wbb.task.Task;
 import wbb.task.TaskType;
 import wbb.ui.Ui;
-import wbb.exception.WBBException;
 
+/**
+ * Provides methods to validate user input for task management, such as checking item indices,
+ * task names, deadlines, and time ranges.
+ */
 public class Validator {
     /**
      * To retrieve, validate and return the item (task) index.
@@ -14,8 +19,10 @@ public class Validator {
      */
     public int validateAndGetItemIdx(String command) throws WBBException {
         String[] commandItemIdx = command.split(" ");
-        if (commandItemIdx.length <= 1)
-            throw new WBBException("\tERROR: Missing item index.\n\tPlease provide a valid index (e.g. mark 2 / unmark 2)");
+        if (commandItemIdx.length <= 1) {
+            throw new WBBException(
+                    "\tERROR: Missing item index.\n\tPlease provide a valid index (e.g. mark 2 / unmark 2)");
+        }
 
         int itemIdx;
         try {
@@ -24,8 +31,9 @@ public class Validator {
             throw new WBBException("\tERROR: Index must be integers only (e.g. 1, 2, ...)");
         }
 
-        if (itemIdx <= -1)  // Potential error input: "mark 0"
+        if (itemIdx <= -1) { // Potential error input: "mark 0"
             throw new WBBException("\tERROR: Index must be greater than or equal to 1");
+        }
         return itemIdx;
     }
 
@@ -36,11 +44,14 @@ public class Validator {
      * @throws WBBException if index is out of bounds, or task list is empty.
      */
     public void validateItemIdxForTaskList(ArrayList<Task> taskList, int itemIdx, Ui ui) throws WBBException {
-        if (taskList.isEmpty())
+        if (taskList.isEmpty()) {
             throw new WBBException("\tERROR: Task list is empty. Nothing to do.");
-        if (itemIdx >= taskList.size()) {  // Potential error input: "mark 100" when list only has 1 element
+        }
+        if (itemIdx >= taskList.size()) { // Potential error input: "mark 100" when list only has 1 element
             ui.printList(taskList);
-            throw new WBBException("\tERROR: Invalid item index.\n\tItem index out of bounds. Please select a valid index in the list above");
+            throw new WBBException(
+                    "\tERROR: Invalid item index.\n\tItem index out of bounds. "
+                            + "Please select a valid index in the list above");
         }
     }
 
@@ -54,8 +65,9 @@ public class Validator {
      */
     public String validateAndGetTaskName(String command, String typeOfTask, TaskType taskType) throws WBBException {
         String taskName = command.substring(typeOfTask.length()).trim();
-        if (taskName.isEmpty())
+        if (taskName.isEmpty()) {
             throw new WBBException("\tERROR: Missing task name\n\t" + taskType.getFormatExample());
+        }
         return taskName;
     }
 
@@ -66,8 +78,9 @@ public class Validator {
      * @throws WBBException if taskName does not contain "/by".
      */
     public void validateTaskNameBy(String taskName, TaskType taskType) throws WBBException {
-        if (!taskName.contains("/by")) // Potential error input: "deadline borrow book"
+        if (!taskName.contains("/by")) { // Potential error input: "deadline borrow book"
             throw new WBBException("\tERROR: Missing '/by'\n\t" + taskType.getFormatExample());
+        }
     }
 
     /**
@@ -79,10 +92,12 @@ public class Validator {
      */
     public String[] validateAndGetTaskNameBy(String taskName, TaskType taskType) throws WBBException {
         String[] taskNameBy = taskName.split("/by");
-        if (taskNameBy.length != 2)
+        if (taskNameBy.length != 2) {
             throw new WBBException("\tERROR: Missing deadline \n\t" + taskType.getFormatExample());
-        if (taskNameBy[0].trim().isEmpty())  // Potential error input: "deadline /by 2"
+        }
+        if (taskNameBy[0].trim().isEmpty()) { // Potential error input: "deadline /by 2"
             throw new WBBException(("\tERROR: Missing task name\n\t" + taskType.getFormatExample()));
+        }
         return taskNameBy;
     }
 
@@ -93,10 +108,12 @@ public class Validator {
      * @throws WBBException if either "/from" or "/to" is missing, or "/from" comes after "/to".
      */
     public void validateFromTo(String taskName, TaskType taskType) throws WBBException {
-        if (!taskName.contains("/from") || !taskName.contains("/to"))
+        if (!taskName.contains("/from") || !taskName.contains("/to")) {
             throw new WBBException("\tERROR: Missing '/from' or '/to'\n\t" + taskType.getFormatExample());
-        if (taskName.indexOf("/from") > taskName.indexOf("/to"))
+        }
+        if (taskName.indexOf("/from") > taskName.indexOf("/to")) {
             throw new WBBException("\tERROR: /from must come before /to\n\t" + taskType.getFormatExample());
+        }
     }
 
     /**
@@ -108,15 +125,17 @@ public class Validator {
      */
     public String[] validateAndGetTaskNameFromTo(String taskName, TaskType taskType) throws WBBException {
         String[] taskNameFromTo = taskName.split("/from");
-        if (taskNameFromTo.length != 2)  // Potential error input: "event borrow /from"
+        if (taskNameFromTo.length != 2) { // Potential error input: "event borrow /from"
             throw new WBBException("\tERROR: Missing start date \n\t" + taskType.getFormatExample());
-        else if (taskNameFromTo[0].trim().isEmpty())  // Potential error input: "event /from /to 2pm"
+        } else if (taskNameFromTo[0].trim().isEmpty()) { // Potential error input: "event /from /to 2pm"
             throw new WBBException("\tERROR: Missing task name \n\t" + taskType.getFormatExample());
-        else
-        if ((taskNameFromTo[1].trim().split("/to")).length == 0)  // Potential error input: "event borrow /from /to"
+        } else if ((taskNameFromTo[1].trim().split("/to")).length == 0) {
+            // Potential error input: "event borrow /from /to"
             throw new WBBException("\tERROR: Missing start date \n\t" + taskType.getFormatExample());
-        else if (taskNameFromTo[1].trim().split("/to")[0].isEmpty())  // Potential error input: "event borrow /from /to 2pm"
+        } else if (taskNameFromTo[1].trim().split("/to")[0].isEmpty()) {
+            // Potential error input: "event borrow /from /to 2pm"
             throw new WBBException("\tERROR: Missing start date \n\t" + taskType.getFormatExample());
+        }
         return taskNameFromTo;
     }
 
@@ -129,8 +148,10 @@ public class Validator {
      */
     public String[] validateAndGetFromTo(String[] taskNameFromTo, TaskType taskType) throws WBBException {
         String[] fromTo = taskNameFromTo[1].split("/to");
-        if (fromTo.length != 2)
-            throw new WBBException("\tERROR: Missing end date \n\t" + taskType.getFormatExample());  // Potential error input: "event borrow /from 2pm /to"
+        if (fromTo.length != 2) {
+            // Potential error input: "event borrow /from 2pm /to"
+            throw new WBBException("\tERROR: Missing end date \n\t" + taskType.getFormatExample());
+        }
         return fromTo;
     }
 }

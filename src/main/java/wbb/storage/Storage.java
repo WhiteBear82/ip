@@ -1,6 +1,13 @@
 package wbb.storage;
-import java.io.*;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+
 import wbb.task.Task;
 import wbb.task.TaskType;
 
@@ -53,7 +60,11 @@ public class Storage {
                 try {
                     TaskType type = TaskType.fromString(parts[0].trim());
                     Task task = type.createTask(parts);
-                    task.isDone = Boolean.parseBoolean(parts[1].trim());
+                    if (Boolean.parseBoolean(parts[1].trim())) {
+                        task.setDone();
+                    } else {
+                        task.setUndone();
+                    }
                     taskList.add(task);
                 } catch (IllegalArgumentException e) {
                     System.out.println("\tERROR: Skipping invalid task " + line);

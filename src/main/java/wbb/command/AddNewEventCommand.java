@@ -1,11 +1,17 @@
 package wbb.command;
+
 import java.util.ArrayList;
-import wbb.task.*;
+
+import wbb.exception.WBBException;
+import wbb.storage.Storage;
+import wbb.task.Event;
+import wbb.task.Task;
 import wbb.task.TaskType;
 import wbb.ui.Ui;
-import wbb.storage.Storage;
-import wbb.exception.WBBException;
 
+/**
+ * Add new event to taskList.
+ */
 public class AddNewEventCommand extends AddCommand {
     /**
      * To validate input and add/save new event task.
@@ -14,7 +20,8 @@ public class AddNewEventCommand extends AddCommand {
      * @throws WBBException if missing "/from" or "/to", "/from" comes after "/to", start date, end date, or taskName
      */
     @Override
-    public void exec(String taskName, TaskType taskType, ArrayList<Task> taskList, Ui ui, Storage storage) throws WBBException {
+    public void exec(String taskName, TaskType taskType,
+                     ArrayList<Task> taskList, Ui ui, Storage storage) throws WBBException {
         validator.validateFromTo(taskName, taskType);
         String[] taskNameFromTo = validator.validateAndGetTaskNameFromTo(taskName, taskType);
         String[] fromTo = validator.validateAndGetFromTo(taskNameFromTo, taskType);

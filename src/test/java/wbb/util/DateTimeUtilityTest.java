@@ -1,12 +1,16 @@
 package wbb.util;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+
+import org.junit.jupiter.api.Test;
 
 public class DateTimeUtilityTest {
 
@@ -109,7 +113,8 @@ public class DateTimeUtilityTest {
     @Test
     public void testIsDueToday_true() {
         LocalDate today = LocalDate.now();
-        String input = dtu.ordinalDay(today.getDayOfMonth()) + " of " + today.format(DateTimeFormatter.ofPattern("MMMM yyyy"));
+        String input = dtu.ordinalDay(today.getDayOfMonth()) + " of "
+                + today.format(DateTimeFormatter.ofPattern("MMMM yyyy"));
         assertTrue(dtu.isDueToday(input));
     }
 

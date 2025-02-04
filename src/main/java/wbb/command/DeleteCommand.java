@@ -1,10 +1,15 @@
 package wbb.command;
+
 import java.util.ArrayList;
+
+import wbb.exception.WBBException;
+import wbb.storage.Storage;
 import wbb.task.Task;
 import wbb.ui.Ui;
-import wbb.storage.Storage;
-import wbb.exception.WBBException;
 
+/**
+ * Delete an item in the taskList.
+ */
 public class DeleteCommand extends Command {
     /**
      * Executes a given command.
