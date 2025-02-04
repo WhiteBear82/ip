@@ -19,11 +19,15 @@ import wbb.exception.WBBException;
 public class Parser {
     /**
      * Parses the original command into subclasses of Command.
-     * @param command The original user command
+     * @param inputs The original user command
      * @return The subclass of Command.
      */
-    public Command parseCommand(String command) throws WBBException {
-        String commandPrefix = command.split(" ")[0];
+    public Command parseCommand(String... inputs) throws WBBException {
+        if (inputs.length == 0) {
+            throw new WBBException("ERROR: No command specified");
+        }
+        String commandPrefix = inputs[0].trim().split("\\s+", 2)[0];
+        System.out.println(commandPrefix);
         return switch (commandPrefix) {
         case "list" -> new ListCommand();
         case "bye" -> new ExitCommand();
