@@ -1,11 +1,17 @@
 package wbb.ui;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import wbb.task.Task;
 
+/**
+ * Handles user interface operations such as displaying messages, reading user input,
+ * and printing task lists. This class is responsible for interacting with the user
+ * and presenting the relevant information.
+ */
 public class Ui {
-    Scanner sc = new Scanner(System.in);
     protected static final String HORIZONTAL_LINE = "\t____________________________________________________________\n";
+    private final Scanner sc = new Scanner(System.in);
     private final StringBuilder outputBuffer = new StringBuilder();
 
     /**
@@ -30,7 +36,9 @@ public class Ui {
      * Provides welcome message to GUI.
      * @return The welcome message.
      */
-    public String getWelcomeMessage() { return "Hello! I'm WinterBearBot.\nWhat can I do for you?"; }
+    public String getWelcomeMessage() {
+        return "Hello! I'm WinterBearBot.\nWhat can I do for you?";
+    }
 
     /**
      * Display message before the end of the program.
@@ -64,7 +72,7 @@ public class Ui {
         System.out.println("\tHere are the tasks in your list:");
         for (int i = 0; i < list.size(); i++) {
             Task item = list.get(i);
-            System.out.printf("\t%d. %s%n", (i+1), item.toString());
+            System.out.printf("\t%d. %s%n", (i + 1), item.toString());
         }
         System.out.println(HORIZONTAL_LINE);
 
@@ -83,7 +91,7 @@ public class Ui {
     public void printAdditionSuccessfulMsg(int taskListSize, Task taskName) {
         String addTaskSuccessfulMsg = "Got it. I've added this task:\n\t";
         String totalTaskMsg = "\nNow you have " + taskListSize + " tasks in the list.";
-        prettyPrint( addTaskSuccessfulMsg + taskName + totalTaskMsg);
+        prettyPrint(addTaskSuccessfulMsg + taskName + totalTaskMsg);
     }
 
     /**
@@ -94,7 +102,7 @@ public class Ui {
     public void printDeleteSuccessfulMsg(int taskListSize, Task taskName) {
         String deleteTaskSuccessfulMsg = "Noted. I've removed this task:\n\t";
         String totalTaskMsg = "\nNow you have " + taskListSize + " tasks in the list.";
-        prettyPrint( deleteTaskSuccessfulMsg + taskName + totalTaskMsg);
+        prettyPrint(deleteTaskSuccessfulMsg + taskName + totalTaskMsg);
     }
 
     /**
@@ -102,9 +110,9 @@ public class Ui {
      * @param tasksDueToday The tasks that are due today.
      */
     public void printTasksDueToday(ArrayList<Task> tasksDueToday) {
-        if (tasksDueToday.isEmpty())
+        if (tasksDueToday.isEmpty()) {
             System.out.println(HORIZONTAL_LINE + "\tNo tasks are due today.\n" + HORIZONTAL_LINE);
-        else {
+        } else {
             System.out.print(HORIZONTAL_LINE);
             System.out.println("\tTasks due today:");
             for (Task task : tasksDueToday) {
@@ -113,12 +121,13 @@ public class Ui {
             System.out.println(HORIZONTAL_LINE);
         }
 
-        if (tasksDueToday.isEmpty())
+        if (tasksDueToday.isEmpty()) {
             prettyPrint("\tNo tasks are due today.");
-        else {
+        } else {
             outputBuffer.append("Tasks due today:\n");
-            for (Task task : tasksDueToday)
+            for (Task task : tasksDueToday) {
                 outputBuffer.append(task).append("\n");
+            }
         }
     }
 
@@ -127,9 +136,9 @@ public class Ui {
      * @param matchingTasks The tasks that are due today.
      */
     public void printMatchingTasks(ArrayList<Task> matchingTasks) {
-        if (matchingTasks.isEmpty())
+        if (matchingTasks.isEmpty()) {
             System.out.println(HORIZONTAL_LINE + "\tNo matching tasks.\n" + HORIZONTAL_LINE);
-        else {
+        } else {
             System.out.println("\tHere are the matching tasks in your list:");
             for (int i = 0; i < matchingTasks.size(); i++) {
                 System.out.println((i + 1) + ". " + matchingTasks.get(i));

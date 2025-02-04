@@ -1,5 +1,10 @@
 package wbb.task;
-public class Todo extends Task{
+
+/**
+ * Represents a Todo task with a description, providing methods to represent the task as a string
+ * and for saving it in a specific format.
+ */
+public class Todo extends Task {
     /**
      * Todo which has a description only.
      * @param description The name of the task.
@@ -24,6 +29,6 @@ public class Todo extends Task{
      */
     @Override
     public String toFileFormat() {
-        return String.format("todo | %b | %s", isDone, description);
+        return String.format("todo | %b | %s", isDone(), description);
     }
 }

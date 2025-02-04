@@ -5,6 +5,13 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Provides utility methods for handling date and time parsing, formatting, and validation.
+ * This class allows parsing of deadline strings into LocalDate, LocalTime, or LocalDateTime
+ * and provides methods for formatting these values into human-readable strings.
+ * It also includes methods to determine if a task's deadline is due today.
+ */
+
 public class DateTimeUtility {
 
     /**
@@ -19,18 +26,21 @@ public class DateTimeUtility {
 
         // Try date-time parsing and get formatted string
         String result = tryParseDateTime(deadline, dateTimeFormatter);
-        if (result != null)
+        if (result != null) {
             return result;
+        }
 
         // Try date-only parsing and get formatted string
         result = tryParseDate(deadline, dateFormatter);
-        if (result != null)
+        if (result != null) {
             return result;
+        }
 
         // Try time-only parsing and get formatted string
         result = tryParseTime(deadline, timeFormatter);
-        if (result != null)
+        if (result != null) {
             return result;
+        }
 
         return deadline;
     }
@@ -43,8 +53,9 @@ public class DateTimeUtility {
     public String tryParseDateTime(String dateTimeString, DateTimeFormatter formatter) {
         try {
             LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, formatter);
-            if (dateTime.isBefore(LocalDateTime.now()))
+            if (dateTime.isBefore(LocalDateTime.now())) {
                 return null;
+            }
             return formatDateTime(dateTime);
         } catch (DateTimeParseException e) {
             return null;
@@ -60,8 +71,9 @@ public class DateTimeUtility {
     public String tryParseDate(String dateString, DateTimeFormatter formatter) {
         try {
             LocalDate date = LocalDate.parse(dateString, formatter);
-            if (date.isBefore(LocalDate.now()))
+            if (date.isBefore(LocalDate.now())) {
                 return null;
+            }
             return formatDate(date);
         } catch (DateTimeParseException e) {
             return null;
@@ -78,8 +90,9 @@ public class DateTimeUtility {
         try {
             LocalTime time = LocalTime.parse(timeString, formatter);
             LocalDateTime dateTime = LocalDateTime.of(LocalDate.now(), time); // Default to today's date
-            if (dateTime.isBefore(LocalDateTime.now()))
+            if (dateTime.isBefore(LocalDateTime.now())) {
                 return null;
+            }
             return formatDateTime(dateTime);
         } catch (DateTimeParseException e) {
             return null;
@@ -116,10 +129,10 @@ public class DateTimeUtility {
             return day + "th";
         }
         return switch (day % 10) {
-            case 1 -> day + "st";
-            case 2 -> day + "nd";
-            case 3 -> day + "rd";
-            default -> day + "th";
+        case 1 -> day + "st";
+        case 2 -> day + "nd";
+        case 3 -> day + "rd";
+        default -> day + "th";
         };
     }
 
@@ -138,12 +151,12 @@ public class DateTimeUtility {
      * @return True if the deadline is equals today, otherwise false.
      */
     public boolean isDueToday(String by) {
-        String normalizedDate = removeOrdinalDay(by);  // e.g. "23rd" -> "23"
+        String normalizedDate = removeOrdinalDay(by); // e.g. "23rd" -> "23"
 
         // List of possible date-time formats
         String[] possibleFormats = {
-                "d 'of' MMMM yyyy, h:mma", // e.g., 23 of January 2025, 6:00pm
-                "d 'of' MMMM yyyy",        // e.g., 23 of January 2025
+            "d 'of' MMMM yyyy, h:mma", // e.g., 23 of January 2025, 6:00pm
+            "d 'of' MMMM yyyy", // e.g., 23 of January 2025
         };
 
         // Iterate through the formats to parse the date

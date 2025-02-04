@@ -1,4 +1,9 @@
 package wbb.task;
+
+/**
+ * Represents the types of tasks (e.g., TODO, DEADLINE, EVENT) that can be created.
+ * Each task type defines how to parse and create a specific task from user input.
+ */
 public enum TaskType {
     TODO("todo", "Please enter a task name (e.g., todo borrow book).") {
         @Override
@@ -47,9 +52,11 @@ public enum TaskType {
      */
     public static TaskType fromString(String type) {
         TaskType taskType = null;
-        for (TaskType t : TaskType.values())
-            if (t.type.equalsIgnoreCase(type))
+        for (TaskType t : TaskType.values()) {
+            if (t.type.equalsIgnoreCase(type)) {
                 taskType = t;
+            }
+        }
         return taskType;
     }
 

@@ -25,11 +25,14 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/bearuser.gif"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/polarbear.gif"));
 
+    /**
+     * Initializes the MainWindow by setting up the scroll view and displaying the welcome message.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(new WinterBearBot().ui.getWelcomeMessage(), dukeImage, "WelcomeMessage")
+                DialogBox.getDukeDialog(new WinterBearBot().getUi().getWelcomeMessage(), dukeImage, "WelcomeMessage")
         );
     }
 

@@ -6,6 +6,9 @@ import wbb.storage.Storage;
 import wbb.task.Task;
 import wbb.ui.Ui;
 
+/**
+ * Find an item in the taskList.
+ */
 public class FindCommand extends Command {
     /**
      * Executes a given command.
@@ -34,9 +37,11 @@ public class FindCommand extends Command {
      */
     public ArrayList<Task> getMatchingTasks(String taskName, ArrayList<Task> taskList) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
-        for (Task task : taskList)
-            if (task.getDescription().toLowerCase().contains(taskName))
+        for (Task task : taskList) {
+            if (task.getDescription().toLowerCase().contains(taskName)) {
                 matchingTasks.add(task);
+            }
+        }
         return matchingTasks;
     }
 }

@@ -1,14 +1,19 @@
 package wbb.util;
 
-import org.junit.jupiter.api.Test;
-import wbb.task.TaskType;
-import wbb.ui.Ui;
-import wbb.exception.WBBException;
-import wbb.task.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import wbb.exception.WBBException;
+import wbb.task.Task;
+import wbb.task.TaskType;
+import wbb.task.Todo;
+import wbb.ui.Ui;
 
 class ValidatorTest {
 
@@ -16,42 +21,42 @@ class ValidatorTest {
     private final Ui ui = new Ui();
 
     @Test
-    void testValidateAndGetItemIdx_ValidIndex() throws WBBException {
+    void testValidateAndGetItemIdxValidIndex() throws WBBException {
         String command = "mark 3";
         int result = validator.validateAndGetItemIdx(command);
         assertEquals(2, result); // Should return 2 as 3 - 1 = 2
     }
 
     @Test
-    void testValidateAndGetItemIdx_MissingIndex() {
+    void testValidateAndGetItemIdxMissingIndex() {
         String command = "mark";
         WBBException exception = assertThrows(WBBException.class, () -> validator.validateAndGetItemIdx(command));
         assertTrue(exception.getMessage().contains("Missing item index"));
     }
 
     @Test
-    void testValidateAndGetItemIdx_NonIntegerIndex() {
+    void testValidateAndGetItemIdxNonIntegerIndex() {
         String command = "mark two";
         WBBException exception = assertThrows(WBBException.class, () -> validator.validateAndGetItemIdx(command));
         assertTrue(exception.getMessage().contains("Index must be integers only"));
     }
 
     @Test
-    void testValidateAndGetItemIdx_NonPositiveIndex() {
+    void testValidateAndGetItemIdxNonPositiveIndex() {
         String command = "mark 0";
         WBBException exception = assertThrows(WBBException.class, () -> validator.validateAndGetItemIdx(command));
         assertTrue(exception.getMessage().contains("Index must be greater than or equal to 1"));
     }
 
     @Test
-    void testValidateItemIdxForTaskList_ValidIndex() throws WBBException {
+    void testValidateItemIdxForTaskListValidIndex() throws WBBException {
         ArrayList<Task> taskList = new ArrayList<>();
         taskList.add(new Todo("Task 1"));
         validator.validateItemIdxForTaskList(taskList, 0, ui); // No exception should be thrown
     }
 
     @Test
-    void testValidateItemIdxForTaskList_EmptyTaskList() {
+    void testValidateItemIdxForTaskListEmptyTaskList() {
         ArrayList<Task> taskList = new ArrayList<>();
         WBBException exception = assertThrows(WBBException.class, ()
                 -> validator.validateItemIdxForTaskList(taskList, 0, ui));
@@ -59,7 +64,7 @@ class ValidatorTest {
     }
 
     @Test
-    void testValidateItemIdxForTaskList_IndexOutOfBounds() {
+    void testValidateItemIdxForTaskListIndexOutOfBounds() {
         ArrayList<Task> taskList = new ArrayList<>();
         taskList.add(new Todo("Task 1"));
         WBBException exception = assertThrows(WBBException.class, ()
@@ -68,14 +73,14 @@ class ValidatorTest {
     }
 
     @Test
-    void testValidateAndGetTaskName_ValidName() throws WBBException {
+    void testValidateAndGetTaskNameValidName() throws WBBException {
         String command = "todo Read book";
         String result = validator.validateAndGetTaskName(command, "todo", TaskType.TODO);
         assertEquals("Read book", result);
     }
 
     @Test
-    void testValidateAndGetTaskName_EmptyTaskName() {
+    void testValidateAndGetTaskNameEmptyTaskName() {
         String command = "todo ";
         WBBException exception = assertThrows(WBBException.class, ()
                 -> validator.validateAndGetTaskName(command, "todo", TaskType.TODO));
@@ -83,13 +88,13 @@ class ValidatorTest {
     }
 
     @Test
-    void testValidateTaskNameBy_ValidTaskName() throws WBBException {
+    void testValidateTaskNameByValidTaskName() throws WBBException {
         String taskName = "Submit report /by Monday";
         validator.validateTaskNameBy(taskName, TaskType.DEADLINE); // No exception should be thrown
     }
 
     @Test
-    void testValidateTaskNameBy_MissingBy() {
+    void testValidateTaskNameByMissingBy() {
         String taskName = "Submit report";
         WBBException exception = assertThrows(WBBException.class, ()
                 -> validator.validateTaskNameBy(taskName, TaskType.DEADLINE));
@@ -97,14 +102,14 @@ class ValidatorTest {
     }
 
     @Test
-    void testValidateAndGetTaskNameBy_ValidInput() throws WBBException {
+    void testValidateAndGetTaskNameByValidInput() throws WBBException {
         String taskName = "Submit report /by Monday";
         String[] result = validator.validateAndGetTaskNameBy(taskName, TaskType.DEADLINE);
         assertArrayEquals(new String[]{"Submit report ", " Monday"}, result);
     }
 
     @Test
-    void testValidateAndGetTaskNameBy_MissingDeadline() {
+    void testValidateAndGetTaskNameByMissingDeadline() {
         String taskName = "Submit report /by";
         WBBException exception = assertThrows(WBBException.class, ()
                 -> validator.validateAndGetTaskNameBy(taskName, TaskType.DEADLINE));
@@ -112,13 +117,13 @@ class ValidatorTest {
     }
 
     @Test
-    void testValidateFromTo_ValidInput() throws WBBException {
+    void testValidateFromToValidInput() throws WBBException {
         String taskName = "Project work /from Monday /to Friday";
         validator.validateFromTo(taskName, TaskType.EVENT); // No exception should be thrown
     }
 
     @Test
-    void testValidateFromTo_MissingFromOrTo() {
+    void testValidateFromToMissingFromOrTo() {
         String taskName = "Project work /from Monday";
         WBBException exception = assertThrows(WBBException.class, ()
                 -> validator.validateFromTo(taskName, TaskType.EVENT));
@@ -126,7 +131,7 @@ class ValidatorTest {
     }
 
     @Test
-    void testValidateFromTo_FromAfterTo() {
+    void testValidateFromToFromAfterTo() {
         String taskName = "Project work /to Friday /from Monday";
         WBBException exception = assertThrows(WBBException.class, ()
                 -> validator.validateFromTo(taskName, TaskType.EVENT));

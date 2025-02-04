@@ -1,15 +1,23 @@
 package wbb.command;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import wbb.exception.WBBException;
-import wbb.storage.Storage;
-import wbb.task.*;
-import wbb.ui.Ui;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import wbb.exception.WBBException;
+import wbb.storage.Storage;
+import wbb.task.Deadline;
+import wbb.task.Event;
+import wbb.task.Task;
+import wbb.task.Todo;
+import wbb.ui.Ui;
 
 class CommandTest {
     private ArrayList<Task> taskList;

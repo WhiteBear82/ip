@@ -1,6 +1,9 @@
 package wbb.task;
 import wbb.util.DateTimeUtility;
 
+/**
+ * Deadline task.
+ */
 public class Deadline extends Task {
     protected String by;
 
@@ -46,6 +49,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toFileFormat() {
-        return String.format("deadline | %b | %s | %s", isDone, description, by);
+        return String.format("deadline | %b | %s | %s", isDone(), description, by);
     }
 }

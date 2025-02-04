@@ -1,11 +1,16 @@
 package wbb.command;
+
 import java.util.ArrayList;
-import wbb.util.Validator;
+
+import wbb.exception.WBBException;
+import wbb.storage.Storage;
 import wbb.task.Task;
 import wbb.ui.Ui;
-import wbb.storage.Storage;
-import wbb.exception.WBBException;
+import wbb.util.Validator;
 
+/**
+ * Represent a user's command.
+ */
 public abstract class Command {
     protected Validator validator;
     public Command() {

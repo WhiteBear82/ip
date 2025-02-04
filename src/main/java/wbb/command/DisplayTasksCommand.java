@@ -1,9 +1,14 @@
 package wbb.command;
+
 import java.util.ArrayList;
+
+import wbb.storage.Storage;
 import wbb.task.Task;
 import wbb.ui.Ui;
-import wbb.storage.Storage;
 
+/**
+ * List all items in the taskList that are due today.
+ */
 public class DisplayTasksCommand extends Command {
     /**
      * Executes a given command.
@@ -32,9 +37,11 @@ public class DisplayTasksCommand extends Command {
      */
     public ArrayList<Task> getTasksDueToday(ArrayList<Task> tasks) {
         ArrayList<Task> tasksDueToday = new ArrayList<>();
-        for (Task task : tasks)
-            if (task.isDueToday())
+        for (Task task : tasks) {
+            if (task.isDueToday()) {
                 tasksDueToday.add(task);
+            }
+        }
         return tasksDueToday;
     }
 }

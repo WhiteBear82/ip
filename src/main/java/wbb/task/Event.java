@@ -1,5 +1,9 @@
 package wbb.task;
-public class Event extends Task{
+
+/**
+ * Event task.
+ */
+public class Event extends Task {
     protected String from;
     protected String to;
 
@@ -32,6 +36,6 @@ public class Event extends Task{
      */
     @Override
     public String toFileFormat() {
-        return String.format("event | %b | %s | %s | %s", isDone, description, from, to);
+        return String.format("event | %b | %s | %s | %s", isDone(), description, from, to);
     }
 }

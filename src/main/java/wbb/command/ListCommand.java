@@ -1,9 +1,14 @@
 package wbb.command;
+
 import java.util.ArrayList;
+
+import wbb.storage.Storage;
 import wbb.task.Task;
 import wbb.ui.Ui;
-import wbb.storage.Storage;
 
+/**
+ * List all items in the taskList.
+ */
 public class ListCommand extends Command {
     /**
      * Executes a given command.

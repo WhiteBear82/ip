@@ -1,9 +1,14 @@
 package wbb.command;
+
 import java.util.ArrayList;
+
+import wbb.storage.Storage;
 import wbb.task.Task;
 import wbb.ui.Ui;
-import wbb.storage.Storage;
 
+/**
+ * Quit the program.
+ */
 public class ExitCommand extends Command {
     /**
      * Executes a given command.
