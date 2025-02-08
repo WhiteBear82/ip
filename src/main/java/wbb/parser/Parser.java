@@ -12,6 +12,7 @@ import wbb.command.DeleteCommand;
 import wbb.command.DisplayTasksCommand;
 import wbb.command.ExitCommand;
 import wbb.command.FindCommand;
+import wbb.command.HelpCommand;
 import wbb.command.ListCommand;
 import wbb.exception.WBBException;
 
@@ -24,18 +25,20 @@ public class Parser {
             "deadline", new AddNewDeadlineCommand(),
             "event", new AddNewEventCommand()
     );
-    private static final Map<String, Command> COMMANDS = Map.of(
-            "list", new ListCommand(),
-            "bye", new ExitCommand(),
-            "mark", new ChangeStatusCommand(),
-            "unmark", new ChangeStatusCommand(),
-            "todo", new AddCommand(),
-            "deadline", new AddCommand(),
-            "event", new AddCommand(),
-            "delete", new DeleteCommand(),
-            "tasks", new DisplayTasksCommand(),
-            "find", new FindCommand()
+    private static final Map<String, Command> COMMANDS = Map.ofEntries(
+            Map.entry("list", new ListCommand()),
+            Map.entry("bye", new ExitCommand()),
+            Map.entry("mark", new ChangeStatusCommand()),
+            Map.entry("unmark", new ChangeStatusCommand()),
+            Map.entry("todo", new AddCommand()),
+            Map.entry("deadline", new AddCommand()),
+            Map.entry("event", new AddCommand()),
+            Map.entry("delete", new DeleteCommand()),
+            Map.entry("tasks", new DisplayTasksCommand()),
+            Map.entry("find", new FindCommand()),
+            Map.entry("help", new HelpCommand())
     );
+
     /**
      * Parses the original command into subclasses of Command.
      * @param inputs The original user command
