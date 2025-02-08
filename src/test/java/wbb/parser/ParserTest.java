@@ -63,14 +63,14 @@ public class ParserTest {
     }
 
     @Test
-    public void testParseAddCommand_validTaskTypes() {
+    public void testParseAddCommand_validTaskTypes() throws WBBException {
         assertInstanceOf(AddNewTodoCommand.class, parser.parseAddCommand("todo"));
         assertInstanceOf(AddNewDeadlineCommand.class, parser.parseAddCommand("deadline"));
         assertInstanceOf(AddNewEventCommand.class, parser.parseAddCommand("event"));
     }
 
     @Test
-    public void testParseAddCommand_invalidTaskType() {
+    public void testParseAddCommand_invalidTaskType() throws WBBException {
         assertInstanceOf(AddNewEventCommand.class, parser.parseAddCommand("unknown"));
     }
 }

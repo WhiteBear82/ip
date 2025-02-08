@@ -1,6 +1,7 @@
 package wbb.command;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import wbb.storage.Storage;
 import wbb.task.Task;
@@ -36,12 +37,8 @@ public class FindCommand extends Command {
      * @return The tasks that are matched by the "find" command.
      */
     public ArrayList<Task> getMatchingTasks(String taskName, ArrayList<Task> taskList) {
-        ArrayList<Task> matchingTasks = new ArrayList<>();
-        for (Task task : taskList) {
-            if (task.getDescription().toLowerCase().contains(taskName)) {
-                matchingTasks.add(task);
-            }
-        }
-        return matchingTasks;
+        return taskList.stream()
+                .filter(task -> task.getDescription().toLowerCase().contains(taskName.toLowerCase()))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }
