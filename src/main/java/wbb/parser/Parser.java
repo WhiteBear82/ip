@@ -1,5 +1,7 @@
 package wbb.parser;
 
+import java.util.Map;
+
 import wbb.command.AddCommand;
 import wbb.command.AddNewDeadlineCommand;
 import wbb.command.AddNewEventCommand;
@@ -17,6 +19,23 @@ import wbb.exception.WBBException;
  * Parse a command.
  */
 public class Parser {
+    private static final Map<String, AddCommand> ADD_COMMANDS = Map.of(
+            "todo", new AddNewTodoCommand(),
+            "deadline", new AddNewDeadlineCommand(),
+            "event", new AddNewEventCommand()
+    );
+    private static final Map<String, Command> COMMANDS = Map.of(
+            "list", new ListCommand(),
+            "bye", new ExitCommand(),
+            "mark", new ChangeStatusCommand(),
+            "unmark", new ChangeStatusCommand(),
+            "todo", new AddCommand(),
+            "deadline", new AddCommand(),
+            "event", new AddCommand(),
+            "delete", new DeleteCommand(),
+            "tasks", new DisplayTasksCommand(),
+            "find", new FindCommand()
+    );
     /**
      * Parses the original command into subclasses of Command.
      * @param inputs The original user command
@@ -27,18 +46,13 @@ public class Parser {
             throw new WBBException("ERROR: No command specified");
         }
         String commandPrefix = inputs[0].trim().split("\\s+", 2)[0];
-        System.out.println(commandPrefix);
-        return switch (commandPrefix) {
-        case "list" -> new ListCommand();
-        case "bye" -> new ExitCommand();
-        case "mark", "unmark" -> new ChangeStatusCommand();
-        case "todo", "deadline", "event" -> new AddCommand();
-        case "delete" -> new DeleteCommand();
-        case "tasks" -> new DisplayTasksCommand();
-        case "find" -> new FindCommand();
-        default -> throw new WBBException("ERROR: Invalid command "
-                + "(valid commands are: list, todo, deadline, event, mark, unmark, delete, tasks, find, bye)");
-        };
+
+        return COMMANDS.entrySet().stream()
+                .filter(entry -> entry.getKey().equals(commandPrefix))
+                .map(Map.Entry::getValue)
+                .findFirst()
+                .orElseThrow(() -> new WBBException("ERROR: Invalid command "
+                        + "(valid commands are: " + String.join(", ", COMMANDS.keySet()) + ")"));
     }
 
     /**
@@ -46,13 +60,12 @@ public class Parser {
      * @param typeOfTask The type of task (e.g. Todo, Deadline, Event).
      * @return The subclass of AddCommand.
      */
-    public AddCommand parseAddCommand(String typeOfTask) {
-        if (typeOfTask.equalsIgnoreCase("todo")) {
-            return new AddNewTodoCommand();
-        } else if (typeOfTask.equalsIgnoreCase("deadline")) {
-            return new AddNewDeadlineCommand();
-        } else {
-            return new AddNewEventCommand();
-        }
+    public AddCommand parseAddCommand(String typeOfTask) throws WBBException {
+        return ADD_COMMANDS.entrySet().stream()
+                .filter(entry -> entry.getKey().equalsIgnoreCase(typeOfTask))
+                .map(Map.Entry::getValue)
+                .findFirst()
+                .orElseThrow(() -> new WBBException("Invalid task type: " + typeOfTask));
     }
+
 }
