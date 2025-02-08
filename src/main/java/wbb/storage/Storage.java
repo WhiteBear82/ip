@@ -24,6 +24,7 @@ public class Storage {
     public void setupFile() {
         File file = new File(FILE_PATH);
         try {
+            assert file.getParentFile() != null : "Parent directory should not be null";
             file.getParentFile().mkdirs();
             file.createNewFile();
         } catch (IOException e) {
@@ -36,8 +37,10 @@ public class Storage {
      * @param taskList The taskList.
      */
     public void saveTasks(ArrayList<Task> taskList) {
+        assert taskList != null : "Task list should not be null";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
             for (Task task : taskList) {
+                assert task != null : "Task should not be null";
                 writer.write(task.toFileFormat());
                 writer.newLine();
             }

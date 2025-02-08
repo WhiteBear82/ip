@@ -37,6 +37,8 @@ public class WinterBearBot {
         while (!isExit) {
             try {
                 String command = ui.readCommand();
+                assert command != null : "Command input should not be null";
+
                 Command c = parser.parseCommand(command);
                 if (c == null) {
                     continue;
@@ -98,15 +100,19 @@ public class WinterBearBot {
         return taskList;
     }
     public void setUi(Ui ui) {
+        assert ui != null : "Ui cannot be null";
         this.ui = ui;
     }
     public void setStorage(Storage storage) {
+        assert storage != null : "Storage cannot be null";
         this.storage = storage;
     }
     public void setParser(Parser parser) {
+        assert parser != null : "Parser cannot be null";
         this.parser = parser;
     }
     public void setTaskList(ArrayList<Task> taskList) {
+        assert taskList != null : "TaskList cannot be null";
         this.taskList = taskList;
     }
 
