@@ -6,6 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import wbb.WinterBearBot;
+import wbb.command.HelpCommand;
 
 /**
  * Controller for the main GUI.
@@ -50,10 +51,15 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = wbb.getResponse(input);
         String commandType = wbb.getCommandType();
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage, commandType)
-        );
+
+        if ("HelpCommand".equals(commandType)) {
+            new HelpCommand().execute(null, null, null, null); // Open the Help window
+        } else {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage, commandType)
+            );
+        }
         userInput.clear();
     }
 }
