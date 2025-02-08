@@ -66,13 +66,13 @@ public class WinterBearBot {
     public String getResponse(String input) {
 
         try {
-            Command c = parser.parseCommand(input);
-            if (c == null) {
+            Command parsedCommand = parser.parseCommand(input);
+            if (parsedCommand == null) {
                 throw new WBBException("ERROR: Invalid command "
                         + "(valid commands are: list, todo, deadline, event, mark, unmark, delete, tasks, find, bye)");
             }
-            c.execute(taskList, input, ui, storage);
-            commandType = c.getClass().getSimpleName();
+            parsedCommand.execute(taskList, input, ui, storage);
+            commandType = parsedCommand.getClass().getSimpleName();
             if (commandType.equals("ExitCommand")) {
                 System.exit(0);
             }
