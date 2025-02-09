@@ -26,7 +26,7 @@ public class Ui {
     }
 
     /**
-     * To display welcome message.
+     * To display welcome message to user.
      */
     public void displayWelcomeMessage() {
         prettyPrint("\tHello! I'm WinterBearBot\n\tWhat can I do for you?"
