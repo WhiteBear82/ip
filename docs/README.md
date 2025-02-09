@@ -20,7 +20,6 @@ Features:
 - [X] Add tasks, deadlines, or events effortlessly.
 - [X] Manage your to-do list with actions like marking as done, unmarking, deleting
 - [X] List all tasks in a clean, organized manner.
-- [ ] 
 
 ```java
 public class WinterBearBot {
