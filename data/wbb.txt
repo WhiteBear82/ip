@@ -1,1 +1,4 @@
 todo | false | test
+todo | false | testing
+event | false | proj meeting | Mon 2pm | 4pm
+deadline | false | eat laksa | 9th of February 2025, 5:00PM
