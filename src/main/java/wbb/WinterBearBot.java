@@ -117,7 +117,7 @@ public class WinterBearBot {
     }
 
     /**
-     * The main method.
+     * Run the program.
      * @param args The arguments for the main method.
      */
     public static void main(String[] args) {
