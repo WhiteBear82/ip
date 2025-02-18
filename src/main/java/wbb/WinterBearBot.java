@@ -30,7 +30,8 @@ public class WinterBearBot {
     }
 
     /**
-     * Program to manage user's taskList.
+     * Continuously processes user commands to manage the task list
+     * until an exit command is received.
      */
     public void manageTaskList() {
         boolean isExit = false;
@@ -52,7 +53,8 @@ public class WinterBearBot {
     }
 
     /**
-     * Run the WinterBearBot Program.
+     * Starts the WinterBearBot application, displaying a welcome message,
+     * managing tasks, and handling user interactions until termination.
      */
     public void runProgram() {
         ui.displayWelcomeMessage();
@@ -117,8 +119,10 @@ public class WinterBearBot {
     }
 
     /**
-     * Run the program.
-     * @param args The arguments for the main method.
+     * Entry point of the WinterBearBot application.
+     * Initializes and runs the bot to handle task management.
+     *
+     * @param args Command-line arguments (not used).
      */
     public static void main(String[] args) {
         new WinterBearBot().runProgram();
