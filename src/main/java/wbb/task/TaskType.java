@@ -11,7 +11,8 @@ public enum TaskType {
             return new Todo(parts[2].trim());
         }
     },
-    DEADLINE("deadline", "Please enter a valid deadline (e.g., deadline return book /by Sunday).") {
+    DEADLINE("deadline", "Please enter a valid deadline (e.g., deadline return book /by Sunday) "
+            + "or (e.g. deadline return book /by d/M/yyyy HHmm)") {
         @Override
         public Task createTask(String[] parts) {
             return new Deadline(parts[2].trim(), parts[3].trim());

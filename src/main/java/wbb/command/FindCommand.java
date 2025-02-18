@@ -27,8 +27,14 @@ public class FindCommand extends Command {
      * @param taskList The taskList.
      */
     public void displayMatchingTasks(ArrayList<Task> taskList, String command, Ui ui) {
-        ArrayList<Task> tasksDueToday = getMatchingTasks(command.split(" ")[1].trim(), taskList);
-        ui.printMatchingTasks(tasksDueToday);
+        String[] parts = command.split(" ", 2);
+        if (parts.length < 2 || parts[1].trim().isEmpty()) {
+            ui.printErrorMsg("Please enter a keyword to search for tasks.");
+            return;
+        }
+
+        ArrayList<Task> matchingTasks = getMatchingTasks(parts[1].trim(), taskList);
+        ui.printMatchingTasks(matchingTasks);
     }
 
     /**
