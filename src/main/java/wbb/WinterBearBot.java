@@ -31,7 +31,7 @@ public class WinterBearBot {
 
     /**
      * Continuously processes user commands to manage the task list
-     * until an exit command is received.
+     * until an exit command is supplied.
      */
     public void manageTaskList() {
         boolean isExit = false;
